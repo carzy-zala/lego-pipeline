@@ -7,7 +7,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <style>
@@ -175,38 +174,78 @@ section{position:relative;overflow:hidden}
 .ds-funnel-arrow{animation:pulseFunnel 1.5s ease infinite}
 @keyframes pulseFunnel{0%,100%{opacity:0.5}50%{opacity:1}}
 
-/* ========== SECTION 04 — RAW TO READY ========== */
-#raw-to-ready{background:#0D0D1A;min-height:500vh;position:relative}
-.journey-container{display:flex;position:sticky;top:0;height:100vh}
-.journey-left{width:30%;padding:60px 40px;display:flex;flex-direction:column;justify-content:center;position:relative}
-.journey-right{width:70%;display:flex;align-items:center;justify-content:center;padding:40px;position:relative;overflow:hidden}
-.stage-name{font-size:clamp(28px,3vw,42px);color:#FFD700;margin-bottom:8px;transition:all .3s}
-.stage-subtitle{font-size:clamp(14px,1.5vw,18px);color:rgba(255,255,255,0.6);margin-bottom:16px;font-weight:700;transition:all .3s}
-.stage-desc{font-size:clamp(14px,1.3vw,16px);color:rgba(255,255,255,0.7);line-height:1.7;margin-bottom:20px;transition:all .3s;max-width:320px}
-.stage-chips{display:flex;gap:8px;flex-wrap:wrap}
-.stage-chip{padding:6px 16px;border-radius:20px;font-size:12px;font-weight:800;text-transform:uppercase;
-  letter-spacing:1px;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.4);transition:all .3s;cursor:pointer}
-.stage-chip:hover{background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.7)}
-.stage-chip.active{color:#fff}
-.stage-chip[data-stage="bronze"].active{background:rgba(205,127,50,0.3);color:#CD7F32}
-.stage-chip[data-stage="silver"].active{background:rgba(168,169,173,0.3);color:#A8A9AD}
-.stage-chip[data-stage="gold"].active{background:rgba(255,215,0,0.3);color:#FFD700}
-.stage-chip[data-stage="ml-ready"].active{background:rgba(0,168,80,0.3);color:#00A850}
-.progress-track{width:6px;height:300px;background:rgba(255,255,255,0.1);border-radius:3px;position:relative;overflow:hidden;margin-top:20px}
-.progress-fill{width:100%;border-radius:3px;height:0;background:linear-gradient(to bottom,#CD7F32 0%,#CD7F32 25%,#A8A9AD 25%,#A8A9AD 50%,#FFD700 50%,#FFD700 75%,#00A850 75%,#00A850 100%)}
-.stage-panel{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.95);
-  width:80%;max-width:600px;opacity:0;transition:all .6s ease;text-align:center;pointer-events:none;
-  background:rgba(255,255,255,0.04);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.08);
-  border-radius:16px;padding:40px 32px;z-index:2}
-.stage-panel.active{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
-.stage-panel code{background:rgba(255,215,0,0.15);color:#FFD700;padding:2px 6px;border-radius:4px;font-size:0.9em}
-.stage-panel h3{font-size:clamp(24px,3vw,36px);margin-bottom:16px}
-.stage-panel p{font-size:clamp(15px,1.8vw,18px);line-height:1.8;color:rgba(255,255,255,0.85)}
-.stage-badge{display:inline-block;padding:8px 24px;border-radius:6px;font-weight:800;
-  font-size:14px;margin-top:16px;text-transform:uppercase}
+/* ========== SECTION 04 — RAW TO READY (U-SHAPE FLOW) ========== */
+#raw-to-ready{background:#0D0D1A;padding:100px 60px;position:relative;overflow:hidden}
+#raw-to-ready h2{font-size:clamp(36px,5vw,56px);color:#FFD700;text-align:center;margin-bottom:16px}
+#raw-to-ready .flow-subtitle{font-size:clamp(16px,2vw,20px);color:rgba(255,255,255,0.6);text-align:center;margin-bottom:60px}
 
-/* Small Three.js brick — bottom-right corner only */
-#brick-canvas{position:absolute;bottom:24px;right:24px;width:120px;height:120px;pointer-events:none;z-index:3;opacity:0.85}
+/* U-shape grid: 3 on top row, turn connector, 2 on bottom row */
+.u-flow{position:relative;max-width:1200px;margin:0 auto}
+.u-row{display:flex;gap:24px;justify-content:center;align-items:stretch}
+.u-row-top{margin-bottom:0}
+.u-row-bottom{margin-top:0;flex-direction:row-reverse}
+
+/* Connector: vertical turn on right side */
+.u-turn{display:flex;justify-content:flex-end;padding-right:calc(50% / 3 - 12px);margin:0}
+.u-turn-line{width:4px;height:60px;position:relative;overflow:hidden}
+.u-turn-line-fill{width:100%;height:0;transition:height 0.8s ease}
+
+/* Flow cards */
+.flow-card{flex:1;max-width:280px;padding:28px 24px;border-radius:12px;position:relative;
+  opacity:0;transform:translateY(40px);transition:all 0.6s cubic-bezier(.175,.885,.32,1.275);
+  border:1px solid rgba(255,255,255,0.08);overflow:hidden}
+.flow-card.visible{opacity:1;transform:translateY(0)}
+.flow-card:hover{transform:translateY(-8px)!important;filter:brightness(1.1)}
+
+.flow-card-num{font-size:48px;font-weight:800;opacity:0.12;position:absolute;top:8px;right:16px;
+  font-family:'Fredoka One',cursive;line-height:1}
+.flow-card-icon{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;margin-bottom:16px;font-size:24px}
+.flow-card h3{font-size:20px;margin-bottom:6px;font-family:'Nunito',sans-serif;font-weight:800}
+.flow-card .flow-stage{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1px;
+  margin-bottom:12px;opacity:0.7}
+.flow-card p{font-size:14px;line-height:1.7;color:rgba(255,255,255,0.8)}
+.flow-card code{background:rgba(255,215,0,0.15);color:#FFD700;padding:2px 6px;border-radius:4px;font-size:0.85em}
+.flow-card .flow-badge{display:inline-block;padding:6px 18px;border-radius:6px;font-weight:800;
+  font-size:12px;margin-top:14px;text-transform:uppercase;letter-spacing:1px}
+
+/* Card colors */
+.flow-card-raw{background:linear-gradient(135deg,rgba(227,0,11,0.15),rgba(227,0,11,0.03));
+  border-color:rgba(227,0,11,0.3)}
+.flow-card-raw h3{color:#E3000B}
+.flow-card-raw .flow-card-icon{background:rgba(227,0,11,0.2)}
+
+.flow-card-bronze{background:linear-gradient(135deg,rgba(205,127,50,0.15),rgba(205,127,50,0.03));
+  border-color:rgba(205,127,50,0.3)}
+.flow-card-bronze h3{color:#CD7F32}
+.flow-card-bronze .flow-card-icon{background:rgba(205,127,50,0.2)}
+
+.flow-card-silver{background:linear-gradient(135deg,rgba(168,169,173,0.15),rgba(168,169,173,0.03));
+  border-color:rgba(168,169,173,0.3)}
+.flow-card-silver h3{color:#A8A9AD}
+.flow-card-silver .flow-card-icon{background:rgba(168,169,173,0.2)}
+
+.flow-card-gold{background:linear-gradient(135deg,rgba(255,215,0,0.15),rgba(255,215,0,0.03));
+  border-color:rgba(255,215,0,0.3)}
+.flow-card-gold h3{color:#FFD700}
+.flow-card-gold .flow-card-icon{background:rgba(255,215,0,0.2)}
+
+.flow-card-ml{background:linear-gradient(135deg,rgba(0,168,80,0.15),rgba(0,168,80,0.03));
+  border-color:rgba(0,168,80,0.3)}
+.flow-card-ml h3{color:#00A850}
+.flow-card-ml .flow-card-icon{background:rgba(0,168,80,0.2)}
+
+/* Horizontal connector arrows between cards */
+.flow-arrow{display:flex;align-items:center;justify-content:center;width:40px;flex-shrink:0;
+  opacity:0;transition:opacity 0.5s ease}
+.flow-arrow.visible{opacity:1}
+.flow-arrow svg{width:32px;height:32px}
+.flow-arrow-line{stroke-dasharray:6 4;animation:flowDash 1s linear infinite}
+@keyframes flowDash{to{stroke-dashoffset:-20}}
+
+/* Animated data particles along the U path */
+.flow-particles{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.flow-particle{position:absolute;width:6px;height:6px;border-radius:50%;opacity:0}
 
 /* ========== SECTION 05 — ARCHITECT AWAKENS ========== */
 #architect{min-height:100vh;background:#000;display:flex;align-items:center;justify-content:center;
@@ -351,9 +390,11 @@ section{position:relative;overflow:hidden}
   .hero-right{min-height:200px}
   .blueprint-cards,.medallion-cols{grid-template-columns:1fr}
   .tool-grid{grid-template-columns:1fr}
-  .journey-container{flex-direction:column}
-  .journey-left{width:100%;padding:20px}
-  .journey-right{width:100%;min-height:60vh}
+  .u-row{flex-direction:column;align-items:center}
+  .u-row-bottom{flex-direction:column}
+  .flow-arrow{transform:rotate(90deg);width:auto;height:40px}
+  .u-turn{justify-content:center;padding-right:0}
+  #raw-to-ready{padding:60px 24px}
   .arch-banner{flex-direction:column;padding:32px 24px;gap:20px}
   .arch-banner-text{text-align:center}
   .ds-cards{grid-template-columns:1fr}
@@ -623,45 +664,72 @@ section{position:relative;overflow:hidden}
   </div>
 </section>
 
-<!-- ==================== SECTION 04 — RAW TO READY ==================== -->
+<!-- ==================== SECTION 04 — RAW TO READY (U-SHAPE FLOW) ==================== -->
 <section id="raw-to-ready">
-  <div class="journey-container">
-    <div class="journey-left">
-      <div class="stage-name" id="stage-name">RAW CHAOS</div>
-      <div class="stage-subtitle" id="stage-subtitle">Stage 1: Bronze Ingestion</div>
-      <div class="stage-desc" id="stage-desc">Raw .dat geometry files from LDraw and catalogue CSVs from Rebrickable arrive unvalidated. The ingestion layer performs raw landing — accepting LDraw and Rebrickable sources as-is into the Bronze zone.</div>
-      <div class="stage-chips">
-        <span class="stage-chip active" data-stage="bronze">BRONZE</span>
-        <span class="stage-chip" data-stage="silver">SILVER</span>
-        <span class="stage-chip" data-stage="gold">GOLD</span>
-        <span class="stage-chip" data-stage="ml-ready">ML-READY</span>
+  <h2>RAW TO READY</h2>
+  <p class="flow-subtitle">Data flows through five stages — each one transforming chaos into clarity.</p>
+  <div class="u-flow">
+    <!-- Top row: Raw → Bronze → Silver (left to right) -->
+    <div class="u-row u-row-top">
+      <div class="flow-card flow-card-raw" data-delay="0">
+        <div class="flow-card-num">01</div>
+        <div class="flow-card-icon">📥</div>
+        <div class="flow-stage" style="color:#E3000B">Ingestion</div>
+        <h3>Raw Chaos</h3>
+        <p>Raw .dat geometry files from LDraw and catalogue CSVs from Rebrickable arrive unvalidated. The ingestion layer performs raw landing — accepting both sources as-is.</p>
+        <div class="flow-badge" style="background:#E3000B;color:#fff">Ingestion Zone</div>
       </div>
-      <div class="progress-track">
-        <div class="progress-fill" id="progress-fill"></div>
+      <div class="flow-arrow" data-delay="200">
+        <svg viewBox="0 0 32 32"><line x1="2" y1="16" x2="28" y2="16" stroke="#CD7F32" stroke-width="3" class="flow-arrow-line"/><polygon points="26,10 32,16 26,22" fill="#CD7F32"/></svg>
+      </div>
+      <div class="flow-card flow-card-bronze" data-delay="400">
+        <div class="flow-card-num">02</div>
+        <div class="flow-card-icon">🧱</div>
+        <div class="flow-stage" style="color:#CD7F32">Bronze Layer</div>
+        <h3>Schema Enforcement</h3>
+        <p>Column type validation, deduplication, and immutable storage. Raw data is preserved as-is with timestamp and source tracking for every ingested file.</p>
+        <div class="flow-badge" style="background:#CD7F32;color:#fff">Bronze</div>
+      </div>
+      <div class="flow-arrow" data-delay="600">
+        <svg viewBox="0 0 32 32"><line x1="2" y1="16" x2="28" y2="16" stroke="#A8A9AD" stroke-width="3" class="flow-arrow-line"/><polygon points="26,10 32,16 26,22" fill="#A8A9AD"/></svg>
+      </div>
+      <div class="flow-card flow-card-silver" data-delay="800">
+        <div class="flow-card-num">03</div>
+        <div class="flow-card-icon">⚙️</div>
+        <div class="flow-stage" style="color:#A8A9AD">Silver Layer</div>
+        <h3>Cleaning the Bricks</h3>
+        <p>Recursive sub-part geometry resolution and metadata joining. Invalid rows flagged with <code>is_valid</code> and <code>issues</code> columns — never dropped.</p>
+        <div class="flow-badge" style="background:#A8A9AD;color:#1A1A2E">Silver</div>
       </div>
     </div>
-    <div class="journey-right">
-      <!-- Small Three.js brick in bottom-right corner -->
-      <canvas id="brick-canvas"></canvas>
-      <div class="stage-panel active" id="stage-0">
-        <h3 style="color:#CD7F32">Stage 1: Raw Chaos — Bronze Ingestion</h3>
-        <p>Raw .dat geometry files from LDraw and catalogue CSVs from Rebrickable arrive unvalidated. The Ingestion layer performs raw landing — accepting LDraw and Rebrickable sources as-is into the Bronze zone.</p>
-        <div class="stage-badge" style="background:#CD7F32;color:#fff">Bronze Layer</div>
+
+    <!-- U-turn connector (right side) -->
+    <div class="u-turn">
+      <div class="u-turn-line">
+        <div class="u-turn-line-fill" style="background:linear-gradient(to bottom,#A8A9AD,#FFD700)"></div>
       </div>
-      <div class="stage-panel" id="stage-1">
-        <h3 style="color:#A8A9AD">Stage 2: Cleaning the Bricks — Silver Layer</h3>
-        <p>Geometry resolution and metadata joining occur here. Invalid rows are flagged with <code>is_valid</code> and <code>issues</code> columns — never dropped. The recursive sub-part resolver ensures geometrically complete point clouds.</p>
-        <div class="stage-badge" style="background:#A8A9AD;color:#1A1A2E">Silver Layer</div>
+    </div>
+
+    <!-- Bottom row: Gold ← ML-Ready (right to left) -->
+    <div class="u-row u-row-bottom">
+      <div class="flow-card flow-card-ml" data-delay="1400">
+        <div class="flow-card-num">05</div>
+        <div class="flow-card-icon">🤖</div>
+        <div class="flow-stage" style="color:#00A850">ML Ready</div>
+        <h3>Pipeline Complete</h3>
+        <p>Eight enriched JSON files per brick. NumPy point clouds of shape (N, 3). Directly consumable by PointNet and similar 3D ML architectures. 120–408 vertices.</p>
+        <div class="flow-badge" style="background:#00A850;color:#fff">ML Ready ✓</div>
       </div>
-      <div class="stage-panel" id="stage-2">
-        <h3 style="color:#FFD700">Stage 3: Building Intelligence — Gold Layer</h3>
-        <p>High-quality filtered records emerge. Feature engineering enriches each brick with part category, color name, year of production, and normalized geometry. The Gold layer filters to valid records for model output while preserving full lineage.</p>
-        <div class="stage-badge" style="background:#FFD700;color:#1A1A2E">Gold Layer</div>
+      <div class="flow-arrow" data-delay="1200">
+        <svg viewBox="0 0 32 32"><line x1="4" y1="16" x2="30" y2="16" stroke="#00A850" stroke-width="3" class="flow-arrow-line"/><polygon points="6,10 0,16 6,22" fill="#00A850"/></svg>
       </div>
-      <div class="stage-panel" id="stage-3">
-        <h3 style="color:#00A850">Stage 4: ML Ready — Output</h3>
-        <p>Eight enriched JSON files per brick. NumPy point clouds of shape (N, 3) — N vertices with x, y, z coordinates. Directly consumable by PointNet and similar 3D ML architectures. Point cloud sizes range from 120 to 408 vertices.</p>
-        <div class="stage-badge" style="background:#00A850;color:#fff;animation:pulse 2s infinite">Pipeline Complete ✓</div>
+      <div class="flow-card flow-card-gold" data-delay="1000">
+        <div class="flow-card-num">04</div>
+        <div class="flow-card-icon">✨</div>
+        <div class="flow-stage" style="color:#FFD700">Gold Layer</div>
+        <h3>Building Intelligence</h3>
+        <p>High-quality filtered records. Feature engineering enriches each brick with part category, color name, year of production, and normalized geometry.</p>
+        <div class="flow-badge" style="background:#FFD700;color:#1A1A2E">Gold</div>
       </div>
     </div>
   </div>
@@ -991,116 +1059,41 @@ document.addEventListener('DOMContentLoaded', function() {
     dsObserver.observe(dsHeading);
   }
 
-  // ========== SECTION 04 — STAGE CHIP CLICK HANDLERS ==========
-  var chipStageMap = { 'bronze': 0, 'silver': 1, 'gold': 2, 'ml-ready': 3 };
+  // ========== SECTION 04 — U-SHAPE FLOW ANIMATION ==========
+  var flowCards = document.querySelectorAll('.flow-card');
+  var flowArrows = document.querySelectorAll('.flow-arrow');
+  var uTurnFill = document.querySelector('.u-turn-line-fill');
+  var flowAnimated = false;
 
-  function forceShowStage(idx) {
-    // Immediately update left panel text
-    var sNameEl = document.getElementById('stage-name');
-    var sSubEl = document.getElementById('stage-subtitle');
-    var sDescEl = document.getElementById('stage-desc');
-    var allChips = document.querySelectorAll('.stage-chip');
-    var sd = [
-      { name: 'RAW CHAOS', subtitle: 'Stage 1: Bronze Ingestion', desc: 'Raw .dat geometry files from LDraw and catalogue CSVs from Rebrickable arrive unvalidated. The ingestion layer performs raw landing — accepting LDraw and Rebrickable sources as-is into the Bronze zone.', chip: 'bronze' },
-      { name: 'CLEANING THE BRICKS', subtitle: 'Stage 2: Silver Layer', desc: 'Geometry resolution and metadata joining occur here. Invalid rows are flagged with is_valid and issues columns — never dropped. The recursive sub-part resolver ensures geometrically complete point clouds.', chip: 'silver' },
-      { name: 'BUILDING INTELLIGENCE', subtitle: 'Stage 3: Gold Layer', desc: 'High-quality filtered records emerge. Feature engineering enriches each brick with part category, color name, year of production, and normalized geometry. The Gold layer filters to valid records for model output while preserving full lineage.', chip: 'gold' },
-      { name: 'ML READY', subtitle: 'Stage 4: Output', desc: 'Eight enriched JSON files per brick. NumPy point clouds of shape (N, 3) — N vertices with x, y, z coordinates. Directly consumable by PointNet and similar 3D ML architectures. Point cloud sizes range from 120 to 408 vertices.', chip: 'ml-ready' }
-    ];
-    var data = sd[idx];
-    if (sNameEl) { sNameEl.textContent = data.name; sNameEl.style.opacity = '1'; sNameEl.style.transform = 'translateY(0)'; }
-    if (sSubEl) { sSubEl.textContent = data.subtitle; sSubEl.style.opacity = '1'; sSubEl.style.transform = 'translateY(0)'; }
-    if (sDescEl) { sDescEl.textContent = data.desc; sDescEl.style.opacity = '1'; sDescEl.style.transform = 'translateY(0)'; }
-    allChips.forEach(function(c) { c.classList.toggle('active', c.dataset.stage === data.chip); });
-    // Immediately update right panel
-    for (var i = 0; i < 4; i++) {
-      var panel = document.getElementById('stage-' + i);
-      if (panel) panel.classList.toggle('active', i === idx);
-    }
-    // Update progress bar
-    var pf = document.getElementById('progress-fill');
-    if (pf) pf.style.height = ((idx + 1) / 4 * 100) + '%';
-    // Reset currentStageIdx so scroll handler doesn't skip
-    currentStageIdx = idx;
-  }
-
-  document.querySelectorAll('.stage-chip').forEach(function(chip) {
-    chip.addEventListener('click', function() {
-      var stageName = chip.dataset.stage;
-      var stageIdx = chipStageMap[stageName];
-      // Immediately show the stage content
-      forceShowStage(stageIdx);
-      // Then scroll to the correct position
-      var section = document.getElementById('raw-to-ready');
-      if (!section) return;
-      var sectionTop = section.offsetTop;
-      var sectionHeight = section.offsetHeight - window.innerHeight;
-      var targetScroll = sectionTop + (stageIdx / 4) * sectionHeight + 10;
-      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
-    });
-  });
-
-  // ========== SECTION 04 — CONTINUOUS SCROLL JOURNEY ==========
-  var stageData = [
-    { name: 'RAW CHAOS', subtitle: 'Stage 1: Bronze Ingestion', desc: 'Raw .dat geometry files from LDraw and catalogue CSVs from Rebrickable arrive unvalidated. The ingestion layer performs raw landing — accepting LDraw and Rebrickable sources as-is into the Bronze zone.', chip: 'bronze' },
-    { name: 'CLEANING THE BRICKS', subtitle: 'Stage 2: Silver Layer', desc: 'Geometry resolution and metadata joining occur here. Invalid rows are flagged with is_valid and issues columns — never dropped. The recursive sub-part resolver ensures geometrically complete point clouds.', chip: 'silver' },
-    { name: 'BUILDING INTELLIGENCE', subtitle: 'Stage 3: Gold Layer', desc: 'High-quality filtered records emerge. Feature engineering enriches each brick with part category, color name, year of production, and normalized geometry. The Gold layer filters to valid records for model output while preserving full lineage.', chip: 'gold' },
-    { name: 'ML READY', subtitle: 'Stage 4: Output', desc: 'Eight enriched JSON files per brick. NumPy point clouds of shape (N, 3) — N vertices with x, y, z coordinates. Directly consumable by PointNet and similar 3D ML architectures. Point cloud sizes range from 120 to 408 vertices.', chip: 'ml-ready' }
-  ];
-
-  var stageNameEl = document.getElementById('stage-name');
-  var stageSubtitleEl = document.getElementById('stage-subtitle');
-  var stageDescEl = document.getElementById('stage-desc');
-  var stageChips = document.querySelectorAll('.stage-chip');
-  var progressFill = document.getElementById('progress-fill');
-  var rawSection = document.getElementById('raw-to-ready');
-  var currentStageIdx = -1;
-
-  function updateLeftPanel(idx) {
-    if (idx === currentStageIdx) return;
-    currentStageIdx = idx;
-    var data = stageData[idx];
-    // Crossfade: fade out
-    [stageNameEl, stageSubtitleEl, stageDescEl].forEach(function(el) {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(-10px)';
-    });
-    setTimeout(function() {
-      stageNameEl.textContent = data.name;
-      stageSubtitleEl.textContent = data.subtitle;
-      stageDescEl.textContent = data.desc;
-      stageChips.forEach(function(c) {
-        c.classList.toggle('active', c.dataset.stage === data.chip);
-      });
-      [stageNameEl, stageSubtitleEl, stageDescEl].forEach(function(el) {
-        el.style.opacity = '1';
-        el.style.transform = 'translateY(0)';
-      });
-    }, 300);
-  }
-
-  if (rawSection) {
-    window.addEventListener('scroll', function() {
-      var rect = rawSection.getBoundingClientRect();
-      var sectionHeight = rawSection.offsetHeight - window.innerHeight;
-      var scrolled = -rect.top;
-      var progress = Math.max(0, Math.min(1, scrolled / sectionHeight));
-
-      // Continuous progress bar fill
-      if (progressFill) progressFill.style.height = (progress * 100) + '%';
-
-      // Map to 4 stages
-      var stageIndex = Math.min(3, Math.floor(progress * 4));
-      updateLeftPanel(stageIndex);
-
-      // Right panel stages
-      for (var i = 0; i < 4; i++) {
-        var panel = document.getElementById('stage-' + i);
-        if (panel) {
-          panel.classList.toggle('active', i === stageIndex);
+  var flowObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting && !flowAnimated) {
+        flowAnimated = true;
+        // Animate cards and arrows with staggered delays
+        flowCards.forEach(function(card) {
+          var delay = parseInt(card.dataset.delay) || 0;
+          setTimeout(function() {
+            card.classList.add('visible');
+          }, delay);
+        });
+        flowArrows.forEach(function(arrow) {
+          var delay = parseInt(arrow.dataset.delay) || 0;
+          setTimeout(function() {
+            arrow.classList.add('visible');
+          }, delay + 100);
+        });
+        // Animate U-turn connector
+        if (uTurnFill) {
+          setTimeout(function() {
+            uTurnFill.style.height = '100%';
+          }, 900);
         }
       }
     });
-  }
+  }, { threshold: 0.15 });
+
+  var rawSection = document.getElementById('raw-to-ready');
+  if (rawSection) flowObserver.observe(rawSection);
 
   // ========== SECTION 05 — ARCHITECT ANIMATION ==========
   var architectPlayed = false;
@@ -1332,58 +1325,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }, observerOptions);
   statNums.forEach(function(s) { statObserver.observe(s); });
 
-  // ========== THREE.JS SMALL BRICK (bottom-right of Section 04 only) ==========
-  function initSmallBrick() {
-    var canvas = document.getElementById('brick-canvas');
-    if (!canvas || typeof THREE === 'undefined') return;
 
-    var scene = new THREE.Scene();
-    var camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
-    camera.position.set(0, 1.5, 3.5);
-    camera.lookAt(0, 0, 0);
-
-    var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-    renderer.setSize(120, 120);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-    var ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-    scene.add(ambientLight);
-    var dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
-    dirLight.position.set(3, 4, 3);
-    scene.add(dirLight);
-
-    var brickMat = new THREE.MeshPhongMaterial({ color: 0x808080 });
-    var bodyGeo = new THREE.BoxGeometry(1.6, 0.6, 0.8);
-    var body = new THREE.Mesh(bodyGeo, brickMat);
-    scene.add(body);
-
-    var studGeo = new THREE.CylinderGeometry(0.15, 0.15, 0.15, 12);
-    [[-0.4, 0.38, -0.2],[0.4, 0.38, -0.2],[-0.4, 0.38, 0.2],[0.4, 0.38, 0.2]].forEach(function(p) {
-      var s = new THREE.Mesh(studGeo, brickMat);
-      s.position.set(p[0], p[1], p[2]);
-      scene.add(s);
-    });
-
-    var targetColor = new THREE.Color(0xFFD700);
-    var greyColor = new THREE.Color(0x808080);
-
-    function animate() {
-      requestAnimationFrame(animate);
-      body.rotation.y += 0.008;
-      scene.children.forEach(function(c) { if (c.isMesh) c.rotation.y = body.rotation.y; });
-      if (rawSection) {
-        var rect = rawSection.getBoundingClientRect();
-        var sh = rawSection.offsetHeight - window.innerHeight;
-        var prog = Math.max(0, Math.min(1, -rect.top / sh));
-        brickMat.color.lerpColors(greyColor, targetColor, prog);
-      }
-      renderer.render(scene, camera);
-    }
-    animate();
-  }
-
-  if (typeof THREE !== 'undefined') { initSmallBrick(); }
-  else { window.addEventListener('load', initSmallBrick); }
 
 });
 </script>
