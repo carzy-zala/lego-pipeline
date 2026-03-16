@@ -158,29 +158,8 @@ section{position:relative;overflow:hidden}
 .stage-badge{display:inline-block;padding:8px 24px;border-radius:6px;font-weight:800;
   font-size:14px;margin-top:16px;text-transform:uppercase}
 
-/* Small Three.js brick — bottom-right corner only */
-#brick-canvas{position:absolute;bottom:24px;right:24px;width:140px;height:140px;pointer-events:none;z-index:3}
-
-/* ========== CINEMATIC ANIMATION — STUD → BRICK → BASEPLATE → TOWERS → TEXT ========== */
-.cinema-stage{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:2}
-.cinema-inner{position:relative;display:flex;flex-direction:column;align-items:center;gap:12px}
-.cinema-stud{width:32px;height:32px;border-radius:50%;background:#FFD700;opacity:0;transform:scale(0);
-  box-shadow:0 0 0 rgba(255,215,0,0)}
-.cinema-brick{width:120px;height:48px;border-radius:5px;background:#E3000B;opacity:0;transform:translateY(-80px) rotate(-10deg);position:relative}
-.cinema-brick::before,.cinema-brick::after{content:'';position:absolute;top:-10px;width:16px;height:10px;
-  border-radius:50% 50% 0 0;background:#c0000a}
-.cinema-brick::before{left:25px}
-.cinema-brick::after{right:25px}
-.cinema-baseplate{display:flex;flex-wrap:wrap;justify-content:center;gap:3px;max-width:240px;opacity:0}
-.cinema-bp-brick{width:28px;height:12px;border-radius:2px;background:#FFD700;opacity:0;transform:scale(0)}
-.cinema-towers{display:flex;gap:32px;align-items:flex-end;opacity:0}
-.cinema-tower{display:flex;flex-direction:column;align-items:center}
-.cinema-tower-stack{transform-origin:bottom;transform:scaleY(0)}
-.cinema-tower-brick{width:40px;height:12px;border-radius:2px;margin-bottom:1px}
-.cinema-tower-label{font-size:10px;font-weight:800;letter-spacing:1px;margin-top:4px;opacity:0}
-.cinema-text{font-family:'Fredoka One',cursive;font-size:clamp(18px,2.5vw,28px);color:#FFD700;
-  opacity:0;letter-spacing:2px;text-align:center}
-.cinema-text span{display:inline-block;opacity:0;transform:translateY(-30px)}
+/* Three.js canvas */
+#brick-canvas{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
 
 /* ========== TRANSITION BANNER — ARCHITECTURE ========== */
 .arch-banner{background:#0D0D1A;padding:48px 60px;display:flex;align-items:center;justify-content:center;gap:40px;
@@ -481,6 +460,7 @@ section{position:relative;overflow:hidden}
 
 <!-- ==================== SECTION 03 — RAW TO READY ==================== -->
 <section id="raw-to-ready">
+  <canvas id="brick-canvas"></canvas>
   <div class="journey-container">
     <div class="journey-left">
       <div class="stage-name" id="stage-name">RAW CHAOS</div>
@@ -489,43 +469,6 @@ section{position:relative;overflow:hidden}
       </div>
     </div>
     <div class="journey-right">
-      <!-- Small Three.js brick in bottom-right corner -->
-      <canvas id="brick-canvas"></canvas>
-      <!-- Cinematic animation overlay -->
-      <div class="cinema-stage" id="cinema-stage">
-        <div class="cinema-inner">
-          <div class="cinema-stud" id="cinema-stud"></div>
-          <div class="cinema-brick" id="cinema-brick"></div>
-          <div class="cinema-baseplate" id="cinema-baseplate"></div>
-          <div class="cinema-towers" id="cinema-towers">
-            <div class="cinema-tower">
-              <div class="cinema-tower-stack" id="ct-bronze">
-                <div class="cinema-tower-brick" style="background:#CD7F32"></div>
-                <div class="cinema-tower-brick" style="background:#CD7F32"></div>
-                <div class="cinema-tower-brick" style="background:#CD7F32"></div>
-              </div>
-              <div class="cinema-tower-label" style="color:#CD7F32">BRONZE</div>
-            </div>
-            <div class="cinema-tower">
-              <div class="cinema-tower-stack" id="ct-silver">
-                <div class="cinema-tower-brick" style="background:#A8A9AD"></div>
-                <div class="cinema-tower-brick" style="background:#A8A9AD"></div>
-                <div class="cinema-tower-brick" style="background:#A8A9AD"></div>
-              </div>
-              <div class="cinema-tower-label" style="color:#A8A9AD">SILVER</div>
-            </div>
-            <div class="cinema-tower">
-              <div class="cinema-tower-stack" id="ct-gold">
-                <div class="cinema-tower-brick" style="background:#FFD700"></div>
-                <div class="cinema-tower-brick" style="background:#FFD700"></div>
-                <div class="cinema-tower-brick" style="background:#FFD700"></div>
-              </div>
-              <div class="cinema-tower-label" style="color:#FFD700">GOLD</div>
-            </div>
-          </div>
-          <div class="cinema-text" id="cinema-text">ARCHITECTURE</div>
-        </div>
-      </div>
       <div class="stage-panel active" id="stage-0">
         <h3 style="color:#CD7F32">Stage 1: Raw Chaos — Bronze Ingestion</h3>
         <p>Raw .dat geometry files from LDraw and catalogue CSVs from Rebrickable arrive unvalidated. The Ingestion layer performs raw landing — accepting LDraw and Rebrickable sources as-is into the Bronze zone.</p>
@@ -1046,34 +989,40 @@ document.addEventListener('DOMContentLoaded', function() {
   }, observerOptions);
   statNums.forEach(function(s) { statObserver.observe(s); });
 
-  // ========== THREE.JS SMALL BRICK (bottom-right corner) ==========
-  function initSmallBrick() {
+  // ========== THREE.JS BRICK ==========
+  function initBrickScene() {
     var canvas = document.getElementById('brick-canvas');
     if (!canvas || typeof THREE === 'undefined') return;
 
     var scene = new THREE.Scene();
-    var camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
-    camera.position.set(0, 1.5, 3.5);
+    var camera = new THREE.PerspectiveCamera(50, canvas.clientWidth / canvas.clientHeight, 0.1, 100);
+    camera.position.set(0, 2, 5);
     camera.lookAt(0, 0, 0);
 
     var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-    renderer.setSize(140, 140);
+    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
+    // Lighting
     var ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
     scene.add(ambientLight);
     var dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
-    dirLight.position.set(3, 4, 3);
+    dirLight.position.set(5, 5, 5);
     scene.add(dirLight);
 
+    // Brick body
     var brickMat = new THREE.MeshPhongMaterial({ color: 0x808080 });
-    var bodyGeo = new THREE.BoxGeometry(1.6, 0.6, 0.8);
+    var bodyGeo = new THREE.BoxGeometry(2, 0.8, 1);
     var body = new THREE.Mesh(bodyGeo, brickMat);
     scene.add(body);
 
-    var studGeo = new THREE.CylinderGeometry(0.15, 0.15, 0.15, 12);
-    [[-0.4, 0.38, -0.2],[0.4, 0.38, -0.2],[-0.4, 0.38, 0.2],[0.4, 0.38, 0.2]].forEach(function(p) {
-      var s = new THREE.Mesh(studGeo, brickMat); s.position.set(p[0],p[1],p[2]); scene.add(s);
+    // Studs
+    var studGeo = new THREE.CylinderGeometry(0.2, 0.2, 0.2, window.innerWidth < 768 ? 8 : 16);
+    var positions = [[-0.5, 0.5, -0.25], [0.5, 0.5, -0.25], [-0.5, 0.5, 0.25], [0.5, 0.5, 0.25]];
+    positions.forEach(function(pos) {
+      var stud = new THREE.Mesh(studGeo, brickMat);
+      stud.position.set(pos[0], pos[1], pos[2]);
+      scene.add(stud);
     });
 
     var targetColor = new THREE.Color(0xFFD700);
@@ -1081,100 +1030,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function animate() {
       requestAnimationFrame(animate);
-      body.rotation.y += 0.008;
-      scene.children.forEach(function(c) { if (c.isMesh) c.rotation.y = body.rotation.y; });
+      body.rotation.y += 0.005;
+      scene.children.forEach(function(child) {
+        if (child.isMesh) child.rotation.y = body.rotation.y;
+      });
+
+      // Color lerp based on scroll
       if (rawSection) {
         var rect = rawSection.getBoundingClientRect();
-        var sh = rawSection.offsetHeight - window.innerHeight;
-        var prog = Math.max(0, Math.min(1, -rect.top / sh));
-        brickMat.color.lerpColors(greyColor, targetColor, prog);
+        var sectionHeight = rawSection.offsetHeight - window.innerHeight;
+        var scrolled = -rect.top;
+        var progress = Math.max(0, Math.min(1, scrolled / sectionHeight));
+        brickMat.color.lerpColors(greyColor, targetColor, progress);
       }
+
       renderer.render(scene, camera);
     }
     animate();
   }
 
-  if (typeof THREE !== 'undefined') { initSmallBrick(); }
-  else { window.addEventListener('load', initSmallBrick); }
-
-  // ========== CINEMATIC ANIMATION (GSAP) ==========
-  function initCinematicAnimation() {
-    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Build baseplate bricks dynamically
-    var bp = document.getElementById('cinema-baseplate');
-    if (bp) {
-      for (var i = 0; i < 24; i++) {
-        var b = document.createElement('div');
-        b.className = 'cinema-bp-brick';
-        bp.appendChild(b);
-      }
-    }
-
-    // Build text letter spans
-    var textEl = document.getElementById('cinema-text');
-    if (textEl) {
-      var txt = textEl.textContent;
-      textEl.textContent = '';
-      txt.split('').forEach(function(ch) {
-        var s = document.createElement('span');
-        s.textContent = ch;
-        textEl.appendChild(s);
-      });
-    }
-
-    var cinemaStage = document.getElementById('cinema-stage');
-    var cinemaPlayed = false;
-
-    ScrollTrigger.create({
-      trigger: '#raw-to-ready',
-      start: 'top top',
-      end: 'bottom bottom',
-      onUpdate: function(self) {
-        if (self.progress > 0.05 && !cinemaPlayed) {
-          cinemaPlayed = true;
-          playCinematic();
-        }
-      }
-    });
-
-    function playCinematic() {
-      var tl = gsap.timeline();
-
-      // Step 1: Stud appears with glow
-      tl.to('#cinema-stud', { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.7)' })
-        .to('#cinema-stud', { boxShadow: '0 0 40px rgba(255,215,0,0.8)', duration: 0.3 })
-        .to('#cinema-stud', { boxShadow: '0 0 12px rgba(255,215,0,0.3)', duration: 0.3 });
-
-      // Step 2: Brick drops in
-      tl.to('#cinema-brick', { opacity: 1, y: 0, rotation: 0, duration: 0.6, ease: 'bounce.out' }, '+=0.2');
-
-      // Step 3: Baseplate bricks pop in
-      tl.to('#cinema-baseplate', { opacity: 1, duration: 0.1 }, '+=0.2');
-      tl.to('.cinema-bp-brick', {
-        opacity: 1, scale: 1, duration: 0.2, stagger: 0.03, ease: 'back.out(1.7)'
-      });
-
-      // Step 4: Towers grow up
-      tl.to('#cinema-towers', { opacity: 1, duration: 0.1 }, '+=0.2');
-      tl.to('#ct-bronze', { scaleY: 1, duration: 0.6, ease: 'back.out(1.7)' })
-        .to('#ct-silver', { scaleY: 1, duration: 0.6, ease: 'back.out(1.7)' }, '-=0.3')
-        .to('#ct-gold', { scaleY: 1, duration: 0.6, ease: 'back.out(1.7)' }, '-=0.3');
-      tl.to('.cinema-tower-label', { opacity: 1, duration: 0.4, stagger: 0.1 });
-
-      // Step 5: Architecture text drops in letter by letter
-      tl.to('#cinema-text', { opacity: 1, duration: 0.1 }, '+=0.2');
-      tl.to('#cinema-text span', {
-        opacity: 1, y: 0, duration: 0.3, stagger: 0.04, ease: 'back.out(1.7)'
-      });
-    }
-  }
-
-  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-    initCinematicAnimation();
+  // Wait for Three.js to load
+  if (typeof THREE !== 'undefined') {
+    initBrickScene();
   } else {
-    window.addEventListener('load', initCinematicAnimation);
+    window.addEventListener('load', initBrickScene);
   }
 
 });
