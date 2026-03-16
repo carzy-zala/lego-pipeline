@@ -185,7 +185,8 @@ section{position:relative;overflow:hidden}
 .stage-desc{font-size:clamp(14px,1.3vw,16px);color:rgba(255,255,255,0.7);line-height:1.7;margin-bottom:20px;transition:all .3s;max-width:320px}
 .stage-chips{display:flex;gap:8px;flex-wrap:wrap}
 .stage-chip{padding:6px 16px;border-radius:20px;font-size:12px;font-weight:800;text-transform:uppercase;
-  letter-spacing:1px;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.4);transition:all .3s}
+  letter-spacing:1px;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.4);transition:all .3s;cursor:pointer}
+.stage-chip:hover{background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.7)}
 .stage-chip.active{color:#fff}
 .stage-chip[data-stage="bronze"].active{background:rgba(205,127,50,0.3);color:#CD7F32}
 .stage-chip[data-stage="silver"].active{background:rgba(168,169,173,0.3);color:#A8A9AD}
@@ -975,6 +976,22 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { threshold: 0.2 });
     dsObserver.observe(dsHeading);
   }
+
+  // ========== SECTION 04 — STAGE CHIP CLICK HANDLERS ==========
+  var chipStageMap = { 'bronze': 0, 'silver': 1, 'gold': 2, 'ml-ready': 3 };
+  document.querySelectorAll('.stage-chip').forEach(function(chip) {
+    chip.addEventListener('click', function() {
+      var stageName = chip.dataset.stage;
+      var stageIdx = chipStageMap[stageName];
+      var section = document.getElementById('raw-to-ready');
+      if (!section) return;
+      var sectionTop = section.offsetTop;
+      var sectionHeight = section.offsetHeight - window.innerHeight;
+      // Scroll to the proportional position within the section
+      var targetScroll = sectionTop + (stageIdx / 4) * sectionHeight + 10;
+      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+    });
+  });
 
   // ========== SECTION 04 — CONTINUOUS SCROLL JOURNEY ==========
   var stageData = [
