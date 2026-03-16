@@ -208,23 +208,27 @@ section{position:relative;overflow:hidden}
 /* Small Three.js brick — bottom-right corner only */
 #brick-canvas{position:absolute;bottom:24px;right:24px;width:120px;height:120px;pointer-events:none;z-index:3;opacity:0.85}
 
-/* ========== TRANSITION BANNER — ARCHITECTURE ========== */
-.arch-banner{background:#0D0D1A;padding:48px 60px;display:flex;align-items:center;justify-content:center;gap:40px;
-  position:relative;overflow:hidden;border-top:3px solid rgba(255,215,0,0.15);border-bottom:3px solid rgba(255,215,0,0.15)}
-.arch-banner-towers{display:flex;gap:24px;align-items:flex-end}
+/* ========== SECTION 05 — ARCHITECT AWAKENS ========== */
+#architect{min-height:100vh;background:#000;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden}
+.architect-content{text-align:center;z-index:2;position:relative}
+.arch-stud{width:40px;height:40px;border-radius:50%;background:#FFD700;margin:0 auto 24px;
+  opacity:0;box-shadow:0 0 0 rgba(255,215,0,0)}
+.arch-baseplate{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin:24px auto;max-width:400px}
+.arch-brick{width:48px;height:20px;border-radius:3px;background:#FFD700;opacity:0;transform:scale(0)}
+.arch-towers{display:flex;justify-content:center;gap:60px;margin:32px 0}
 .arch-tower{display:flex;flex-direction:column;align-items:center}
-.tower-stack{width:36px;transform-origin:bottom;transform:scaleY(0);transition:transform .8s cubic-bezier(.175,.885,.32,1.275)}
-.tower-stack.visible{transform:scaleY(1)}
-.tower-brick{width:36px;height:10px;border-radius:2px;margin-bottom:1px}
-.tower-label{font-size:11px;font-weight:800;letter-spacing:1px;margin-top:6px;opacity:0;transition:opacity .5s .8s}
-.tower-label.visible{opacity:1}
-.arch-banner-text{text-align:left;max-width:500px}
-.arch-banner-text h3{font-size:clamp(20px,3vw,32px);color:#FFD700;margin-bottom:8px;opacity:0;transform:translateX(20px);transition:all .6s ease}
-.arch-banner-text h3.visible{opacity:1;transform:translateX(0)}
-.arch-banner-text p{font-size:clamp(13px,1.5vw,16px);color:rgba(255,255,255,0.65);line-height:1.6;opacity:0;transition:opacity .6s .3s}
-.arch-banner-text p.visible{opacity:1}
-.arch-banner-glow{position:absolute;top:50%;left:50%;width:200px;height:200px;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,215,0,0.08),transparent 70%);transform:translate(-50%,-50%);pointer-events:none}
+.tower-stack{width:60px;transform-origin:bottom;transform:scaleY(0)}
+.tower-brick{width:60px;height:16px;border-radius:2px;margin-bottom:2px}
+.tower-label{font-size:14px;font-weight:800;letter-spacing:2px;margin-top:8px;opacity:0}
+.arch-title{font-size:clamp(40px,6vw,80px);color:#FFD700;opacity:0;overflow:hidden}
+.arch-title span{display:inline-block;transform:translateY(-100px);opacity:0}
+.arch-tagline{font-size:clamp(14px,2vw,20px);color:rgba(255,255,255,0.7);margin-top:16px;opacity:0;max-width:600px;margin-left:auto;margin-right:auto}
+.arch-scroll-hint{margin-top:32px;opacity:0}
+.arch-scroll-brick{display:inline-block;width:50px;height:24px;background:#FFD700;border-radius:4px;
+  color:#0D0D1A;font-weight:800;line-height:24px;text-align:center;
+  animation:bounceHint 1s ease infinite}
+@keyframes bounceHint{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
 
 /* ========== SECTION 06 — MEDALLION ========== */
 #medallion{background:#06142E;padding:100px 60px;position:relative;
@@ -398,9 +402,9 @@ section{position:relative;overflow:hidden}
     <div class="sidebar-num">04</div>
     <span class="sidebar-label">Raw to Ready</span>
   </a>
-  <a href="#medallion" class="sidebar-item" data-section="medallion">
+  <a href="#architect" class="sidebar-item" data-section="architect">
     <div class="sidebar-num">05</div>
-    <span class="sidebar-label">Architect Awakens</span>
+    <span class="sidebar-label">The Architect</span>
   </a>
   <a href="#medallion" class="sidebar-item" data-section="medallion">
     <div class="sidebar-num">06</div>
@@ -430,7 +434,7 @@ section{position:relative;overflow:hidden}
   <div class="bottom-nav-item" data-target="blueprint">02</div>
   <div class="bottom-nav-item" data-target="data-sources">03</div>
   <div class="bottom-nav-item" data-target="raw-to-ready">04</div>
-  <div class="bottom-nav-item" data-target="medallion">05</div>
+  <div class="bottom-nav-item" data-target="architect">05</div>
   <div class="bottom-nav-item" data-target="medallion">06</div>
   <div class="bottom-nav-item" data-target="toolbox">07</div>
   <div class="bottom-nav-item" data-target="build-log">08</div>
@@ -663,40 +667,47 @@ section{position:relative;overflow:hidden}
   </div>
 </section>
 
-<!-- ==================== TRANSITION BANNER — ARCHITECTURE ==================== -->
-<div class="arch-banner" id="arch-banner">
-  <div class="arch-banner-glow"></div>
-  <div class="arch-banner-towers">
-    <div class="arch-tower">
-      <div class="tower-stack" id="tower-bronze">
-        <div class="tower-brick" style="background:#CD7F32"></div>
-        <div class="tower-brick" style="background:#CD7F32"></div>
-        <div class="tower-brick" style="background:#CD7F32"></div>
+<!-- ==================== SECTION 05 — ARCHITECT AWAKENS ==================== -->
+<section id="architect">
+  <div class="architect-content">
+    <div class="arch-stud"></div>
+    <div class="arch-baseplate" id="arch-baseplate"></div>
+    <div class="arch-towers">
+      <div class="arch-tower">
+        <div class="tower-stack" id="tower-bronze">
+          <div class="tower-brick" style="background:#CD7F32"></div>
+          <div class="tower-brick" style="background:#CD7F32"></div>
+          <div class="tower-brick" style="background:#CD7F32"></div>
+          <div class="tower-brick" style="background:#CD7F32"></div>
+        </div>
+        <div class="tower-label" style="color:#CD7F32">BRONZE</div>
       </div>
-      <div class="tower-label" style="color:#CD7F32">BRONZE</div>
+      <div class="arch-tower">
+        <div class="tower-stack" id="tower-silver">
+          <div class="tower-brick" style="background:#A8A9AD"></div>
+          <div class="tower-brick" style="background:#A8A9AD"></div>
+          <div class="tower-brick" style="background:#A8A9AD"></div>
+          <div class="tower-brick" style="background:#A8A9AD"></div>
+        </div>
+        <div class="tower-label" style="color:#A8A9AD">SILVER</div>
+      </div>
+      <div class="arch-tower">
+        <div class="tower-stack" id="tower-gold">
+          <div class="tower-brick" style="background:#FFD700"></div>
+          <div class="tower-brick" style="background:#FFD700"></div>
+          <div class="tower-brick" style="background:#FFD700"></div>
+          <div class="tower-brick" style="background:#FFD700"></div>
+        </div>
+        <div class="tower-label" style="color:#FFD700">GOLD</div>
+      </div>
     </div>
-    <div class="arch-tower">
-      <div class="tower-stack" id="tower-silver">
-        <div class="tower-brick" style="background:#A8A9AD"></div>
-        <div class="tower-brick" style="background:#A8A9AD"></div>
-        <div class="tower-brick" style="background:#A8A9AD"></div>
-      </div>
-      <div class="tower-label" style="color:#A8A9AD">SILVER</div>
-    </div>
-    <div class="arch-tower">
-      <div class="tower-stack" id="tower-gold">
-        <div class="tower-brick" style="background:#FFD700"></div>
-        <div class="tower-brick" style="background:#FFD700"></div>
-        <div class="tower-brick" style="background:#FFD700"></div>
-      </div>
-      <div class="tower-label" style="color:#FFD700">GOLD</div>
+    <div class="arch-title" id="arch-title"></div>
+    <p class="arch-tagline">Every great LEGO build starts with a blueprint. Every great data pipeline starts with architecture.</p>
+    <div class="arch-scroll-hint">
+      <div class="arch-scroll-brick">↓</div>
     </div>
   </div>
-  <div class="arch-banner-text">
-    <h3>MEDALLION ARCHITECTURE</h3>
-    <p>Every great LEGO build starts with a blueprint. Every great data pipeline starts with architecture. Bronze → Silver → Gold.</p>
-  </div>
-</div>
+</section>
 
 <!-- ==================== SECTION 06 — MEDALLION ==================== -->
 <section id="medallion">
@@ -1091,32 +1102,99 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // ========== TRANSITION BANNER — ARCHITECTURE ANIMATION (NO Three.js) ==========
-  var archBanner = document.getElementById('arch-banner');
-  var archBannerPlayed = false;
-  if (archBanner) {
-    var bannerObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting && !archBannerPlayed) {
-          archBannerPlayed = true;
-          var towerBronze = document.getElementById('tower-bronze');
-          var towerSilver = document.getElementById('tower-silver');
-          var towerGold = document.getElementById('tower-gold');
-          var towerLabels = archBanner.querySelectorAll('.tower-label');
-          var bannerH3 = archBanner.querySelector('.arch-banner-text h3');
-          var bannerP = archBanner.querySelector('.arch-banner-text p');
-          [towerBronze, towerSilver, towerGold].forEach(function(t, i) {
-            setTimeout(function() { if (t) t.classList.add('visible'); }, i * 250);
-          });
-          setTimeout(function() {
-            towerLabels.forEach(function(l) { l.classList.add('visible'); });
-          }, 900);
-          setTimeout(function() { if (bannerH3) bannerH3.classList.add('visible'); }, 400);
-          setTimeout(function() { if (bannerP) bannerP.classList.add('visible'); }, 700);
-        }
+  // ========== SECTION 05 — ARCHITECT ANIMATION ==========
+  var architectPlayed = false;
+  var archSection = document.getElementById('architect');
+  // Build baseplate bricks
+  var baseplate = document.getElementById('arch-baseplate');
+  if (baseplate) {
+    for (var b = 0; b < 40; b++) {
+      var brick = document.createElement('div');
+      brick.className = 'arch-brick';
+      baseplate.appendChild(brick);
+    }
+  }
+  // Build title letters
+  var titleEl = document.getElementById('arch-title');
+  if (titleEl) {
+    'ARCHITECTURE'.split('').forEach(function(ch) {
+      var span = document.createElement('span');
+      span.textContent = ch;
+      titleEl.appendChild(span);
+    });
+  }
+  var archObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting && !architectPlayed) {
+        architectPlayed = true;
+        playArchitectAnimation();
+      }
+    });
+  }, { threshold: 0.5 });
+  if (archSection) archObserver.observe(archSection);
+  function playArchitectAnimation() {
+    var stud = document.querySelector('.arch-stud');
+    var baseBricks = document.querySelectorAll('.arch-brick');
+    var towerBronze = document.getElementById('tower-bronze');
+    var towerSilver = document.getElementById('tower-silver');
+    var towerGold = document.getElementById('tower-gold');
+    var towerLabels = document.querySelectorAll('.tower-label');
+    var titleLetters = document.querySelectorAll('.arch-title span');
+    var tagline = document.querySelector('.arch-tagline');
+    var scrollHint = document.querySelector('.arch-scroll-hint');
+    // T=0: Stud fades in
+    if (stud) {
+      stud.style.transition = 'opacity .5s, transform .6s, box-shadow .3s';
+      stud.style.opacity = '1';
+      stud.style.animation = 'pulse 0.6s ease infinite alternate';
+    }
+    // T=0.6: Flash
+    setTimeout(function() {
+      if (stud) {
+        stud.style.boxShadow = '0 0 80px rgba(255,215,0,0.9)';
+        setTimeout(function() { stud.style.boxShadow = '0 0 0 rgba(255,215,0,0)'; }, 300);
+      }
+    }, 600);
+    // T=1.0: Baseplate bricks
+    setTimeout(function() {
+      baseBricks.forEach(function(b, i) {
+        setTimeout(function() {
+          b.style.transition = 'all .3s cubic-bezier(.175,.885,.32,1.275)';
+          b.style.opacity = '1';
+          b.style.transform = 'scale(1)';
+        }, i * 30);
       });
-    }, { threshold: 0.4 });
-    bannerObserver.observe(archBanner);
+    }, 1000);
+    // T=2.0: Towers
+    setTimeout(function() {
+      [towerBronze, towerSilver, towerGold].forEach(function(t, i) {
+        setTimeout(function() {
+          if (t) { t.style.transition = 'transform .8s cubic-bezier(.175,.885,.32,1.275)'; t.style.transform = 'scaleY(1)'; }
+        }, i * 200);
+      });
+      setTimeout(function() {
+        towerLabels.forEach(function(l) { l.style.transition = 'opacity .5s'; l.style.opacity = '1'; });
+      }, 800);
+    }, 2000);
+    // T=3.8: Title letters
+    setTimeout(function() {
+      titleLetters.forEach(function(l, i) {
+        setTimeout(function() {
+          l.style.transition = 'all .4s cubic-bezier(.175,.885,.32,1.275)';
+          l.style.transform = 'translateY(0)';
+          l.style.opacity = '1';
+        }, i * 60);
+      });
+      if (titleEl) { titleEl.style.opacity = '1'; }
+    }, 3800);
+    // T=4.5: Tagline
+    setTimeout(function() {
+      if (tagline) { tagline.style.transition = 'opacity .8s'; tagline.style.opacity = '1'; }
+    }, 4500);
+    // T=5.0: Scroll hint
+    setTimeout(function() {
+      if (scrollHint) { scrollHint.style.transition = 'opacity .5s'; scrollHint.style.opacity = '1'; }
+    }, 5000);
   }
 
   // ========== SECTION 08 — BUILD LOG STEPS ==========
