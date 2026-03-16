@@ -73,8 +73,8 @@ section{position:relative;overflow:hidden}
 .stud-ring .stud{position:absolute;width:14px;height:14px;border-radius:50%}
 
 .hero-name{font-size:clamp(36px,5vw,56px);color:#fff;margin-bottom:8px;overflow:hidden;
-  white-space:nowrap;border-right:3px solid #FFD700;width:0;animation:typewriter 2s steps(16) .5s forwards,blink .7s step-end infinite alternate}
-@keyframes typewriter{to{width:100%}}
+  white-space:nowrap;border-right:3px solid #FFD700;width:0;animation:typewriter 2s steps(16) 0.5s forwards,blink 0.7s step-end 0.5s 2;}
+@keyframes typewriter{to{width:100%; border-right-color: transparent;}}
 @keyframes blink{50%{border-color:transparent}}
 
 .role-badge{display:inline-block;background:#E3000B;color:#fff;padding:8px 24px;
@@ -490,7 +490,7 @@ section{position:relative;overflow:hidden}
   <div class="lego-watermark">LEGO</div>
   <div class="hero-left">
     <div class="profile-wrap">
-      <img src="https://avatars.githubusercontent.com/carzy-zala" alt="Jayrajsinh Zala profile photo" class="profile-img" width="200" height="200" loading="lazy">
+      <img src="https://github.com/carzy-zala.png" alt="Jayrajsinh Zala profile photo" class="profile-img" width="200" height="200" loading="lazy">
       <svg class="stud-ring" viewBox="0 0 240 240">
         <circle cx="120" cy="10" r="7" fill="#E3000B"/>
         <circle cx="175" cy="25" r="7" fill="#006CB7"/>
@@ -589,22 +589,10 @@ section{position:relative;overflow:hidden}
       </svg>
       <h3>Rebrickable</h3>
       <span class="ds-badge ds-badge-red">Catalogue Data</span>
-      <div class="ds-row">
-        <div class="ds-row-label">Format</div>
-        <div class="ds-row-value">CSV files</div>
-      </div>
-      <div class="ds-row">
-        <div class="ds-row-label">Contains</div>
-        <div class="ds-row-value">Part IDs, colors, categories, dimensions, set membership, part relationships</div>
-      </div>
-      <div class="ds-row">
-        <div class="ds-row-label">Scale</div>
-        <div class="ds-row-value">70,000+ unique parts, 200+ colors, 11,000+ sets</div>
-      </div>
-      <div class="ds-row">
-        <div class="ds-row-label">Role in Pipeline</div>
-        <div class="ds-row-value">Semantic enrichment layer — provides the human-readable metadata that gives raw geometry its meaning</div>
-      </div>
+      <div class="ds-row"><div class="ds-row-label">Format</div><div class="ds-row-value">CSV files</div></div>
+      <div class="ds-row"><div class="ds-row-label">Contains</div><div class="ds-row-value">Part IDs, colors, categories, dimensions, set membership, part relationships</div></div>
+      <div class="ds-row"><div class="ds-row-label">Scale</div><div class="ds-row-value">70,000+ unique parts, 200+ colors, 11,000+ sets</div></div>
+      <div class="ds-row"><div class="ds-row-label">Role in Pipeline</div><div class="ds-row-value">Semantic enrichment layer — provides the human-readable metadata that gives raw geometry its meaning</div></div>
       <div class="ds-stream">
         <div class="ds-stream-line" style="top:4px;width:60%;background:#E3000B;animation-delay:0s"></div>
         <div class="ds-stream-line" style="top:8px;width:45%;background:#E3000B;animation-delay:0.3s"></div>
@@ -625,35 +613,18 @@ section{position:relative;overflow:hidden}
       </svg>
       <h3>LDraw</h3>
       <span class="ds-badge ds-badge-blue">Geometry Data</span>
-      <div class="ds-row">
-        <div class="ds-row-label">Format</div>
-        <div class="ds-row-value">.dat files</div>
-      </div>
-      <div class="ds-row">
-        <div class="ds-row-label">Contains</div>
-        <div class="ds-row-value">3D vertex coordinates, subfile references, triangle/quad primitives, part hierarchy</div>
-      </div>
-      <div class="ds-row">
-        <div class="ds-row-label">Scale</div>
-        <div class="ds-row-value">10,000+ part geometry files, recursive sub-part references</div>
-      </div>
-      <div class="ds-row">
-        <div class="ds-row-label">Role in Pipeline</div>
-        <div class="ds-row-value">Geometric foundation — provides the 3D spatial data that defines every LEGO part's physical form</div>
-      </div>
+      <div class="ds-row"><div class="ds-row-label">Format</div><div class="ds-row-value">.dat files</div></div>
+      <div class="ds-row"><div class="ds-row-label">Contains</div><div class="ds-row-value">3D vertex coordinates, subfile references, triangle/quad primitives, part hierarchy</div></div>
+      <div class="ds-row"><div class="ds-row-label">Scale</div><div class="ds-row-value">10,000+ part geometry files, recursive sub-part references</div></div>
+      <div class="ds-row"><div class="ds-row-label">Role in Pipeline</div><div class="ds-row-value">Geometric foundation — provides the 3D spatial data that defines every LEGO part's physical form</div></div>
       <svg class="ds-dots" viewBox="0 0 60 60">
-        <circle cx="10" cy="10" r="2" fill="#006CB7"/>
-        <circle cx="30" cy="10" r="2" fill="#006CB7"/>
-        <circle cx="50" cy="10" r="2" fill="#006CB7"/>
-        <circle cx="20" cy="30" r="2" fill="#006CB7"/>
-        <circle cx="40" cy="30" r="2" fill="#006CB7"/>
-        <circle cx="10" cy="50" r="2" fill="#006CB7"/>
-        <circle cx="30" cy="50" r="2" fill="#006CB7"/>
-        <circle cx="50" cy="50" r="2" fill="#006CB7"/>
+        <circle cx="10" cy="10" r="2" fill="#006CB7"/><circle cx="30" cy="10" r="2" fill="#006CB7"/>
+        <circle cx="50" cy="10" r="2" fill="#006CB7"/><circle cx="20" cy="30" r="2" fill="#006CB7"/>
+        <circle cx="40" cy="30" r="2" fill="#006CB7"/><circle cx="10" cy="50" r="2" fill="#006CB7"/>
+        <circle cx="30" cy="50" r="2" fill="#006CB7"/><circle cx="50" cy="50" r="2" fill="#006CB7"/>
       </svg>
     </div>
   </div>
-  <!-- Connecting funnel -->
   <div class="ds-funnel">
     <svg viewBox="0 0 120 60" fill="none">
       <path d="M10 5 L60 50 L110 5" stroke="#FFD700" stroke-width="2" fill="none" class="ds-funnel-arrow"/>
@@ -664,16 +635,15 @@ section{position:relative;overflow:hidden}
   </div>
 </section>
 
-<!-- ==================== SECTION 04 — RAW TO READY (U-SHAPE FLOW) ==================== -->
+<!-- ==================== SECTION 04 — RAW TO READY ==================== -->
 <section id="raw-to-ready">
   <h2>RAW TO READY</h2>
   <p class="flow-subtitle">Data flows through five stages — each one transforming chaos into clarity.</p>
   <div class="u-flow">
-    <!-- Top row: Raw → Bronze → Silver (left to right) -->
+    <!-- Top row: Raw → Bronze → Silver -->
     <div class="u-row u-row-top">
       <div class="flow-card flow-card-raw" data-delay="0">
-        <div class="flow-card-num">01</div>
-        <div class="flow-card-icon">📥</div>
+        <div class="flow-card-num">01</div><div class="flow-card-icon">📥</div>
         <div class="flow-stage" style="color:#E3000B">Ingestion</div>
         <h3>Raw Chaos</h3>
         <p>Raw .dat geometry files from LDraw and catalogue CSVs from Rebrickable arrive unvalidated. The ingestion layer performs raw landing — accepting both sources as-is.</p>
@@ -683,8 +653,7 @@ section{position:relative;overflow:hidden}
         <svg viewBox="0 0 32 32"><line x1="2" y1="16" x2="28" y2="16" stroke="#CD7F32" stroke-width="3" class="flow-arrow-line"/><polygon points="26,10 32,16 26,22" fill="#CD7F32"/></svg>
       </div>
       <div class="flow-card flow-card-bronze" data-delay="400">
-        <div class="flow-card-num">02</div>
-        <div class="flow-card-icon">🧱</div>
+        <div class="flow-card-num">02</div><div class="flow-card-icon">🧱</div>
         <div class="flow-stage" style="color:#CD7F32">Bronze Layer</div>
         <h3>Schema Enforcement</h3>
         <p>Column type validation, deduplication, and immutable storage. Raw data is preserved as-is with timestamp and source tracking for every ingested file.</p>
@@ -694,8 +663,7 @@ section{position:relative;overflow:hidden}
         <svg viewBox="0 0 32 32"><line x1="2" y1="16" x2="28" y2="16" stroke="#A8A9AD" stroke-width="3" class="flow-arrow-line"/><polygon points="26,10 32,16 26,22" fill="#A8A9AD"/></svg>
       </div>
       <div class="flow-card flow-card-silver" data-delay="800">
-        <div class="flow-card-num">03</div>
-        <div class="flow-card-icon">⚙️</div>
+        <div class="flow-card-num">03</div><div class="flow-card-icon">⚙️</div>
         <div class="flow-stage" style="color:#A8A9AD">Silver Layer</div>
         <h3>Cleaning the Bricks</h3>
         <p>Recursive sub-part geometry resolution and metadata joining. Invalid rows flagged with <code>is_valid</code> and <code>issues</code> columns — never dropped.</p>
@@ -703,33 +671,31 @@ section{position:relative;overflow:hidden}
       </div>
     </div>
 
-    <!-- U-turn connector (right side) -->
-    <div class="u-turn">
-      <div class="u-turn-line">
-        <div class="u-turn-line-fill" style="background:linear-gradient(to bottom,#A8A9AD,#FFD700)"></div>
+    <!-- Down arrow from Silver to Gold (replaces the U-turn line) -->
+    <div class="u-turn" style="justify-content:flex-end;padding-right:0;display:flex;align-items:center;justify-content:center;margin:16px 0">
+      <div class="flow-arrow visible" style="opacity:1;transform:rotate(90deg)">
+        <svg viewBox="0 0 32 32"><line x1="2" y1="16" x2="28" y2="16" stroke="#FFD700" stroke-width="3" class="flow-arrow-line"/><polygon points="26,10 32,16 26,22" fill="#FFD700"/></svg>
       </div>
     </div>
 
-    <!-- Bottom row: Gold ← ML-Ready (right to left) -->
-    <div class="u-row u-row-bottom">
-      <div class="flow-card flow-card-ml" data-delay="1400">
-        <div class="flow-card-num">05</div>
-        <div class="flow-card-icon">🤖</div>
-        <div class="flow-stage" style="color:#00A850">ML Ready</div>
-        <h3>Pipeline Complete</h3>
-        <p>Eight enriched JSON files per brick. NumPy point clouds of shape (N, 3). Directly consumable by PointNet and similar 3D ML architectures. 120–408 vertices.</p>
-        <div class="flow-badge" style="background:#00A850;color:#fff">ML Ready ✓</div>
-      </div>
-      <div class="flow-arrow" data-delay="1200">
-        <svg viewBox="0 0 32 32"><line x1="4" y1="16" x2="30" y2="16" stroke="#00A850" stroke-width="3" class="flow-arrow-line"/><polygon points="6,10 0,16 6,22" fill="#00A850"/></svg>
-      </div>
+    <!-- Bottom row: Gold → ML Ready (left to right) -->
+    <div class="u-row u-row-bottom" style="flex-direction:row">
       <div class="flow-card flow-card-gold" data-delay="1000">
-        <div class="flow-card-num">04</div>
-        <div class="flow-card-icon">✨</div>
+        <div class="flow-card-num">04</div><div class="flow-card-icon">✨</div>
         <div class="flow-stage" style="color:#FFD700">Gold Layer</div>
         <h3>Building Intelligence</h3>
         <p>High-quality filtered records. Feature engineering enriches each brick with part category, color name, year of production, and normalized geometry.</p>
         <div class="flow-badge" style="background:#FFD700;color:#1A1A2E">Gold</div>
+      </div>
+      <div class="flow-arrow" data-delay="1200">
+        <svg viewBox="0 0 32 32"><line x1="2" y1="16" x2="28" y2="16" stroke="#00A850" stroke-width="3" class="flow-arrow-line"/><polygon points="26,10 32,16 26,22" fill="#00A850"/></svg>
+      </div>
+      <div class="flow-card flow-card-ml" data-delay="1400">
+        <div class="flow-card-num">05</div><div class="flow-card-icon">🤖</div>
+        <div class="flow-stage" style="color:#00A850">ML Ready</div>
+        <h3>Pipeline Complete</h3>
+        <p>Eight enriched JSON files. NumPy point clouds of shape (N, 3). Directly consumable by PointNet and similar 3D ML architectures. 120–408 vertices.</p>
+        <div class="flow-badge" style="background:#00A850;color:#fff">ML Ready ✓</div>
       </div>
     </div>
   </div>
@@ -743,37 +709,29 @@ section{position:relative;overflow:hidden}
     <div class="arch-towers">
       <div class="arch-tower">
         <div class="tower-stack" id="tower-bronze">
-          <div class="tower-brick" style="background:#CD7F32"></div>
-          <div class="tower-brick" style="background:#CD7F32"></div>
-          <div class="tower-brick" style="background:#CD7F32"></div>
-          <div class="tower-brick" style="background:#CD7F32"></div>
+          <div class="tower-brick" style="background:#CD7F32"></div><div class="tower-brick" style="background:#CD7F32"></div>
+          <div class="tower-brick" style="background:#CD7F32"></div><div class="tower-brick" style="background:#CD7F32"></div>
         </div>
         <div class="tower-label" style="color:#CD7F32">BRONZE</div>
       </div>
       <div class="arch-tower">
         <div class="tower-stack" id="tower-silver">
-          <div class="tower-brick" style="background:#A8A9AD"></div>
-          <div class="tower-brick" style="background:#A8A9AD"></div>
-          <div class="tower-brick" style="background:#A8A9AD"></div>
-          <div class="tower-brick" style="background:#A8A9AD"></div>
+          <div class="tower-brick" style="background:#A8A9AD"></div><div class="tower-brick" style="background:#A8A9AD"></div>
+          <div class="tower-brick" style="background:#A8A9AD"></div><div class="tower-brick" style="background:#A8A9AD"></div>
         </div>
         <div class="tower-label" style="color:#A8A9AD">SILVER</div>
       </div>
       <div class="arch-tower">
         <div class="tower-stack" id="tower-gold">
-          <div class="tower-brick" style="background:#FFD700"></div>
-          <div class="tower-brick" style="background:#FFD700"></div>
-          <div class="tower-brick" style="background:#FFD700"></div>
-          <div class="tower-brick" style="background:#FFD700"></div>
+          <div class="tower-brick" style="background:#FFD700"></div><div class="tower-brick" style="background:#FFD700"></div>
+          <div class="tower-brick" style="background:#FFD700"></div><div class="tower-brick" style="background:#FFD700"></div>
         </div>
         <div class="tower-label" style="color:#FFD700">GOLD</div>
       </div>
     </div>
     <div class="arch-title" id="arch-title"></div>
     <p class="arch-tagline">Every great LEGO build starts with a blueprint. Every great data pipeline starts with architecture.</p>
-    <div class="arch-scroll-hint">
-      <div class="arch-scroll-brick">↓</div>
-    </div>
+    <div class="arch-scroll-hint"><div class="arch-scroll-brick">↓</div></div>
   </div>
 </section>
 
@@ -782,8 +740,7 @@ section{position:relative;overflow:hidden}
   <h2>THE MEDALLION ARCHITECTURE</h2>
   <div class="medallion-cols">
     <div class="med-col bronze-col reveal">
-      <div class="step-num">STEP 01</div>
-      <h3>Bronze Layer</h3>
+      <div class="step-num">STEP 01</div><h3>Bronze Layer</h3>
       <ul>
         <li>Raw landing zone for LDraw .dat files and Rebrickable CSVs</li>
         <li>Schema enforcement and column type validation</li>
@@ -793,8 +750,7 @@ section{position:relative;overflow:hidden}
       </ul>
     </div>
     <div class="med-col silver-col reveal">
-      <div class="step-num">STEP 02</div>
-      <h3>Silver Layer</h3>
+      <div class="step-num">STEP 02</div><h3>Silver Layer</h3>
       <ul>
         <li>Recursive sub-part geometry resolution</li>
         <li>Metadata joining via part ID and color code keys</li>
@@ -804,81 +760,36 @@ section{position:relative;overflow:hidden}
       </ul>
     </div>
     <div class="med-col gold-col reveal">
-      <div class="step-num">STEP 03</div>
-      <h3>Gold Layer</h3>
+      <div class="step-num">STEP 03</div><h3>Gold Layer</h3>
       <ul>
         <li>High-quality filtered records for model output</li>
         <li>Feature engineering: category, color, year enrichment</li>
-        <li>Eight enriched JSON files per brick</li>
+        <li>Eight enriched JSON files </li>
         <li>NumPy point clouds — shape (N, 3), 120–408 vertices</li>
         <li>Directly consumable by PointNet architectures</li>
       </ul>
     </div>
   </div>
   <div class="stats-row">
-    <div class="stat-item reveal">
-      <div class="stat-num" data-target="8">0</div>
-      <div class="stat-label">JSON Files Per Brick</div>
-    </div>
-    <div class="stat-item reveal">
-      <div class="stat-num" data-target="408">0</div>
-      <div class="stat-label">Max Vertices</div>
-    </div>
-    <div class="stat-item reveal">
-      <div class="stat-num" data-target="5">0</div>
-      <div class="stat-label">Pipeline Stages</div>
-    </div>
-    <div class="stat-item reveal">
-      <div class="stat-num" data-target="100">0</div>
-      <div class="stat-label">% Auditable</div>
-    </div>
+    <div class="stat-item reveal"><div class="stat-num" data-target="8">0</div><div class="stat-label">JSON Files</div></div>
+    <div class="stat-item reveal"><div class="stat-num" data-target="408">0</div><div class="stat-label">Max Vertices</div></div>
+    <div class="stat-item reveal"><div class="stat-num" data-target="5">0</div><div class="stat-label">Pipeline Stages</div></div>
+    <div class="stat-item reveal"><div class="stat-num" data-target="100">0</div><div class="stat-label">% Auditable</div></div>
   </div>
 </section>
 
-<!-- ==================== SECTION 07 — TOOLBOX (LDraw card removed) ==================== -->
+<!-- ==================== SECTION 07 — TOOLBOX ==================== -->
 <section id="toolbox">
   <h2>THE TOOLBOX</h2>
   <div class="tool-grid">
-    <div class="tool-card reveal">
-      <div class="tool-stud" style="background:rgba(255,153,0,0.15)"><div class="tool-stud-inner" style="background:#FF9900"></div></div>
-      <div class="tool-name">AWS</div>
-      <div class="tool-desc">Cloud infrastructure and scalable storage for pipeline data</div>
-    </div>
-    <div class="tool-card reveal">
-      <div class="tool-stud" style="background:rgba(0,120,212,0.15)"><div class="tool-stud-inner" style="background:#0078D4"></div></div>
-      <div class="tool-name">Azure</div>
-      <div class="tool-desc">Enterprise cloud services and data lake integration</div>
-    </div>
-    <div class="tool-card reveal">
-      <div class="tool-stud" style="background:rgba(255,215,0,0.15)"><div class="tool-stud-inner" style="background:#B8860B"></div></div>
-      <div class="tool-name">Python</div>
-      <div class="tool-desc">Core language for pipeline logic, geometry processing, and ML</div>
-    </div>
-    <div class="tool-card reveal">
-      <div class="tool-stud" style="background:rgba(227,0,11,0.15)"><div class="tool-stud-inner" style="background:#E3000B"></div></div>
-      <div class="tool-name">PySpark</div>
-      <div class="tool-desc">Distributed processing for large-scale data transformations</div>
-    </div>
-    <div class="tool-card reveal">
-      <div class="tool-stud" style="background:rgba(26,158,158,0.15)"><div class="tool-stud-inner" style="background:#1A9E9E"></div></div>
-      <div class="tool-name">Databricks</div>
-      <div class="tool-desc">Unified analytics platform for Medallion Architecture</div>
-    </div>
-    <div class="tool-card reveal">
-      <div class="tool-stud" style="background:rgba(0,168,80,0.15)"><div class="tool-stud-inner" style="background:#00A850"></div></div>
-      <div class="tool-name">SQL</div>
-      <div class="tool-desc">Data querying, validation, and schema enforcement</div>
-    </div>
-    <div class="tool-card reveal">
-      <div class="tool-stud" style="background:rgba(128,0,128,0.15)"><div class="tool-stud-inner" style="background:#800080"></div></div>
-      <div class="tool-name">JSON Schema</div>
-      <div class="tool-desc">Structured validation for enriched output datasets</div>
-    </div>
-    <div class="tool-card reveal">
-      <div class="tool-stud" style="background:rgba(0,0,0,0.1)"><div class="tool-stud-inner" style="background:#333"></div></div>
-      <div class="tool-name">Git</div>
-      <div class="tool-desc">Version control and collaborative development workflow</div>
-    </div>
+    <div class="tool-card reveal"><div class="tool-stud" style="background:rgba(255,153,0,0.15)"><div class="tool-stud-inner" style="background:#FF9900"></div></div><div class="tool-name">AWS</div><div class="tool-desc">Cloud infrastructure and scalable storage for pipeline data</div></div>
+    <div class="tool-card reveal"><div class="tool-stud" style="background:rgba(0,120,212,0.15)"><div class="tool-stud-inner" style="background:#0078D4"></div></div><div class="tool-name">Azure</div><div class="tool-desc">Enterprise cloud services and data lake integration</div></div>
+    <div class="tool-card reveal"><div class="tool-stud" style="background:rgba(255,215,0,0.15)"><div class="tool-stud-inner" style="background:#B8860B"></div></div><div class="tool-name">Python</div><div class="tool-desc">Core language for pipeline logic, geometry processing, and ML</div></div>
+    <div class="tool-card reveal"><div class="tool-stud" style="background:rgba(227,0,11,0.15)"><div class="tool-stud-inner" style="background:#E3000B"></div></div><div class="tool-name">PySpark</div><div class="tool-desc">Distributed processing for large-scale data transformations</div></div>
+    <div class="tool-card reveal"><div class="tool-stud" style="background:rgba(26,158,158,0.15)"><div class="tool-stud-inner" style="background:#1A9E9E"></div></div><div class="tool-name">Databricks</div><div class="tool-desc">Unified analytics platform for Medallion Architecture</div></div>
+    <div class="tool-card reveal"><div class="tool-stud" style="background:rgba(0,168,80,0.15)"><div class="tool-stud-inner" style="background:#00A850"></div></div><div class="tool-name">SQL</div><div class="tool-desc">Data querying, validation, and schema enforcement</div></div>
+    <div class="tool-card reveal"><div class="tool-stud" style="background:rgba(128,0,128,0.15)"><div class="tool-stud-inner" style="background:#800080"></div></div><div class="tool-name">JSON Schema</div><div class="tool-desc">Structured validation for enriched output datasets</div></div>
+    <div class="tool-card reveal"><div class="tool-stud" style="background:rgba(0,0,0,0.1)"><div class="tool-stud-inner" style="background:#333"></div></div><div class="tool-name">Git</div><div class="tool-desc">Version control and collaborative development workflow</div></div>
   </div>
 </section>
 
@@ -887,48 +798,12 @@ section{position:relative;overflow:hidden}
   <h2>BUILD LOG</h2>
   <div class="log-steps">
     <div class="log-line"><div class="log-line-fill" id="log-line-fill"></div></div>
-    <div class="log-step">
-      <div class="step-circle">1</div>
-      <div class="step-content">
-        <h3>Recursive Sub-Part Resolution</h3>
-        <p>LDraw uses a recursive sub-part reference system. A single brick file references stud geometry files, cavity files, and primitives. Our recursive resolver with visited-set circular reference guard and four-location library search ensures every vertex is accounted for while preventing infinite loops.</p>
-      </div>
-    </div>
-    <div class="log-step from-right">
-      <div class="step-circle">2</div>
-      <div class="step-content">
-        <h3>Data Quality: Flagged, Not Dropped</h3>
-        <p>Invalid rows are never dropped — they are flagged with <code>is_valid</code> and <code>issues</code> columns at the Silver layer. The Gold layer filters for valid records for model output, but full lineage is preserved. Every training run is auditable.</p>
-      </div>
-    </div>
-    <div class="log-step">
-      <div class="step-circle">3</div>
-      <div class="step-content">
-        <h3>Precise Geometry Processing</h3>
-        <p>We extract raw triangle meshes from LDraw geometry and perform uniform Poisson disk sampling to generate high-density point clouds. Every asset is centered at the origin and scaled to fit within a unit sphere for consistent ML input.</p>
-      </div>
-    </div>
-    <div class="log-step from-right">
-      <div class="step-circle">4</div>
-      <div class="step-content">
-        <h3>Metadata Fusion &amp; Enrichment</h3>
-        <p>Joining raw geometry with Rebrickable's semantic catalogue requires precise mapping. We use part IDs and color codes as primary keys to fuse 3D data with real-world metadata — part category, color name, and year of production.</p>
-      </div>
-    </div>
-    <div class="log-step">
-      <div class="step-circle">5</div>
-      <div class="step-content">
-        <h3>ML-Ready Output</h3>
-        <p>Eight enriched JSON files per brick. NumPy point clouds of shape (N, 3) — directly consumable by PointNet and similar 3D ML architectures. Point cloud sizes range from 120 to 408 vertices.</p>
-      </div>
-    </div>
-    <div class="log-step from-right">
-      <div class="step-circle">6</div>
-      <div class="step-content">
-        <h3>Future-Proof Architecture</h3>
-        <p>The Medallion architecture accommodates new data modalities — photogrammetry scans, voxel data, video datasets — as new Bronze source modules without restructuring Silver or Gold layers.</p>
-      </div>
-    </div>
+    <div class="log-step"><div class="step-circle">1</div><div class="step-content"><h3>Recursive Sub-Part Resolution</h3><p>LDraw uses a recursive sub-part reference system. A single brick file references stud geometry files, cavity files, and primitives. Our recursive resolver with visited-set circular reference guard and four-location library search ensures every vertex is accounted for while preventing infinite loops.</p></div></div>
+    <div class="log-step from-right"><div class="step-circle">2</div><div class="step-content"><h3>Data Quality: Flagged, Not Dropped</h3><p>Invalid rows are never dropped — they are flagged with <code>is_valid</code> and <code>issues</code> columns at the Silver layer. The Gold layer filters for valid records for model output, but full lineage is preserved. Every training run is auditable.</p></div></div>
+    <div class="log-step"><div class="step-circle">3</div><div class="step-content"><h3>Precise Geometry Processing</h3><p>We extract raw triangle meshes from LDraw geometry and perform uniform Poisson disk sampling to generate high-density point clouds. Every asset is centered at the origin and scaled to fit within a unit sphere for consistent ML input.</p></div></div>
+    <div class="log-step from-right"><div class="step-circle">4</div><div class="step-content"><h3>Metadata Fusion &amp; Enrichment</h3><p>Joining raw geometry with Rebrickable's semantic catalogue requires precise mapping. We use part IDs and color codes as primary keys to fuse 3D data with real-world metadata — part category, color name, and year of production.</p></div></div>
+    <div class="log-step"><div class="step-circle">5</div><div class="step-content"><h3>ML-Ready Output</h3><p>Eight enriched JSON files. NumPy point clouds of shape (N, 3) — directly consumable by PointNet and similar 3D ML architectures. Point cloud sizes range from 120 to 408 vertices.</p></div></div>
+    <div class="log-step from-right"><div class="step-circle">6</div><div class="step-content"><h3>Future-Proof Architecture</h3><p>The Medallion architecture accommodates new data modalities — photogrammetry scans, voxel data, video datasets — as new Bronze source modules without restructuring Silver or Gold layers.</p></div></div>
   </div>
 </section>
 
@@ -947,97 +822,71 @@ section{position:relative;overflow:hidden}
   </div>
   <p class="motivation-body reveal">What began as a passion for both data engineering and LEGO bricks became a mission: to build the definitive data pipeline that transforms raw, fragmented 3D assets into structured, enriched, ML-ready datasets. The architecture is built to scale — from today's geometry and metadata to tomorrow's photogrammetry, voxels, and multi-modal training data.</p>
   <div class="timeline reveal">
-    <div class="tl-step">
-      <div class="tl-dot"></div>
-      <div class="tl-label">Idea</div>
-    </div>
+    <div class="tl-step"><div class="tl-dot"></div><div class="tl-label">Idea</div></div>
     <div class="tl-line"><div class="tl-line-fill"></div></div>
-    <div class="tl-step">
-      <div class="tl-dot"></div>
-      <div class="tl-label">Build</div>
-    </div>
+    <div class="tl-step"><div class="tl-dot"></div><div class="tl-label">Build</div></div>
     <div class="tl-line"><div class="tl-line-fill"></div></div>
-    <div class="tl-step">
-      <div class="tl-dot"></div>
-      <div class="tl-label">Deploy</div>
-    </div>
+    <div class="tl-step"><div class="tl-dot"></div><div class="tl-label">Deploy</div></div>
   </div>
 </section>
 
 <!-- ==================== SECTION 10 — CONNECT ==================== -->
 <section id="connect">
-  <img src="https://avatars.githubusercontent.com/carzy-zala" alt="Jayrajsinh Zala" class="connect-photo" width="80" height="80" loading="lazy">
+  <img src="https://github.com/carzy-zala.png" alt="Jayrajsinh Zala" class="connect-photo" width="80" height="80" loading="lazy">
   <div class="connect-name">Jayrajsinh Zala</div>
   <div class="connect-role">Data Engineer · 3+ Years</div>
   <h2 class="connect-heading" id="connect-heading"></h2>
   <div class="connect-ctas">
-    <a href="https://github.com/carzy-zala/LEGO-3D-Asset-Data-Pipeline" target="_blank" rel="noopener noreferrer" class="brick-btn brick-btn-blue">View Full Project on GitHub ↗</a>
+    <a href="https://www.linkedin.com/in/jayarajsinhzala/" target="_blank" rel="noopener noreferrer" class="brick-btn brick-btn-blue">Visit My LinkedIn Profile</a>
     <a href="https://github.com/carzy-zala" target="_blank" rel="noopener noreferrer" class="brick-btn brick-btn-red">Visit My GitHub Profile</a>
+    <a href="mailto:jnzaalaa@gmail.com" target="_blank" rel="noopener noreferrer" class="brick-btn brick-btn-yellow">Mail Me: jnzaalaa@gmail.com</a>
+    <a href="https://github.com/carzy-zala/LEGO-3D-Asset-Data-Pipeline" target="_blank" rel="noopener noreferrer" class="brick-btn brick-btn-green">View Full Project on GitHub ↗</a>
   </div>
   <p class="connect-footer">Built with Python, passion, and a few too many LEGO bricks.</p>
   <div id="confetti-container" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:hidden"></div>
 </section>
 
-</div><!-- /main-content -->
+</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
 
-  // ========== SIDEBAR ACTIVE STATE ==========
-  const sections = document.querySelectorAll('section');
-  const sidebarItems = document.querySelectorAll('.sidebar-item');
-  const bottomItems = document.querySelectorAll('.bottom-nav-item');
+  var sections = document.querySelectorAll('section');
+  var sidebarItems = document.querySelectorAll('.sidebar-item');
+  var bottomItems = document.querySelectorAll('.bottom-nav-item');
+  var observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
 
-  const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
-
-  const sectionObserver = new IntersectionObserver(function(entries) {
+  var sectionObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
-        const id = entry.target.id;
-        sidebarItems.forEach(function(item) {
-          item.classList.toggle('active', item.dataset.section === id);
-        });
-        bottomItems.forEach(function(item) {
-          item.classList.toggle('active', item.dataset.target === id);
-        });
+        var id = entry.target.id;
+        sidebarItems.forEach(function(item) { item.classList.toggle('active', item.dataset.section === id); });
+        bottomItems.forEach(function(item) { item.classList.toggle('active', item.dataset.target === id); });
       }
     });
   }, { threshold: 0.3 });
-
   sections.forEach(function(s) { sectionObserver.observe(s); });
-
   bottomItems.forEach(function(item) {
-    item.addEventListener('click', function() {
-      document.getElementById(item.dataset.target).scrollIntoView({ behavior: 'smooth' });
-    });
+    item.addEventListener('click', function() { document.getElementById(item.dataset.target).scrollIntoView({ behavior: 'smooth' }); });
   });
 
-  // ========== REVEAL ON SCROLL ==========
-  const revealObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) { if (entry.isIntersecting) entry.target.classList.add('visible'); });
   }, observerOptions);
-
   document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
 
-  // ========== BLUEPRINT CARD FLIP ==========
-  const cardObserver = new IntersectionObserver(function(entries) {
+  var cardObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
-        const cards = entry.target.querySelectorAll('.bp-card');
-        cards.forEach(function(card, i) {
+        entry.target.querySelectorAll('.bp-card').forEach(function(card, i) {
           setTimeout(function() { card.classList.add('visible'); }, i * 150);
         });
       }
     });
   }, observerOptions);
-  const bpCards = document.querySelector('.blueprint-cards');
+  var bpCards = document.querySelector('.blueprint-cards');
   if (bpCards) cardObserver.observe(bpCards);
 
-  // ========== SECTION 03 — DATA SOURCES ANIMATION ==========
   var dsHeading = document.querySelector('.ds-heading');
   var dsSubtitle = document.querySelector('.ds-subtitle');
   var dsCards = document.querySelectorAll('.ds-card');
@@ -1048,10 +897,7 @@ document.addEventListener('DOMContentLoaded', function() {
           dsHeading.classList.add('visible');
           dsSubtitle.classList.add('visible');
           dsCards.forEach(function(card, i) {
-            setTimeout(function() {
-              card.style.transition = 'all .7s ease';
-              card.classList.add('visible');
-            }, i * 150 + 300);
+            setTimeout(function() { card.style.transition = 'all .7s ease'; card.classList.add('visible'); }, i * 150 + 300);
           });
         }
       });
@@ -1059,72 +905,34 @@ document.addEventListener('DOMContentLoaded', function() {
     dsObserver.observe(dsHeading);
   }
 
-  // ========== SECTION 04 — U-SHAPE FLOW ANIMATION ==========
   var flowCards = document.querySelectorAll('.flow-card');
   var flowArrows = document.querySelectorAll('.flow-arrow');
   var uTurnFill = document.querySelector('.u-turn-line-fill');
   var flowAnimated = false;
-
   var flowObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting && !flowAnimated) {
         flowAnimated = true;
-        // Animate cards and arrows with staggered delays
-        flowCards.forEach(function(card) {
-          var delay = parseInt(card.dataset.delay) || 0;
-          setTimeout(function() {
-            card.classList.add('visible');
-          }, delay);
-        });
-        flowArrows.forEach(function(arrow) {
-          var delay = parseInt(arrow.dataset.delay) || 0;
-          setTimeout(function() {
-            arrow.classList.add('visible');
-          }, delay + 100);
-        });
-        // Animate U-turn connector
-        if (uTurnFill) {
-          setTimeout(function() {
-            uTurnFill.style.height = '100%';
-          }, 900);
-        }
+        flowCards.forEach(function(card) { var delay = parseInt(card.dataset.delay) || 0; setTimeout(function() { card.classList.add('visible'); }, delay); });
+        flowArrows.forEach(function(arrow) { var delay = parseInt(arrow.dataset.delay) || 0; setTimeout(function() { arrow.classList.add('visible'); }, delay + 100); });
+        if (uTurnFill) { setTimeout(function() { uTurnFill.style.height = '100%'; }, 900); }
       }
     });
   }, { threshold: 0.15 });
-
   var rawSection = document.getElementById('raw-to-ready');
   if (rawSection) flowObserver.observe(rawSection);
 
-  // ========== SECTION 05 — ARCHITECT ANIMATION ==========
   var architectPlayed = false;
   var archSection = document.getElementById('architect');
-  // Build baseplate bricks
   var baseplate = document.getElementById('arch-baseplate');
-  if (baseplate) {
-    for (var b = 0; b < 40; b++) {
-      var brick = document.createElement('div');
-      brick.className = 'arch-brick';
-      baseplate.appendChild(brick);
-    }
-  }
-  // Build title letters
+  if (baseplate) { for (var b = 0; b < 40; b++) { var brick = document.createElement('div'); brick.className = 'arch-brick'; baseplate.appendChild(brick); } }
   var titleEl = document.getElementById('arch-title');
-  if (titleEl) {
-    'ARCHITECTURE'.split('').forEach(function(ch) {
-      var span = document.createElement('span');
-      span.textContent = ch;
-      titleEl.appendChild(span);
-    });
-  }
+  if (titleEl) { 'ARCHITECTURE'.split('').forEach(function(ch) { var span = document.createElement('span'); span.textContent = ch; titleEl.appendChild(span); }); }
   var archObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting && !architectPlayed) {
-        architectPlayed = true;
-        playArchitectAnimation();
-      }
-    });
+    entries.forEach(function(entry) { if (entry.isIntersecting && !architectPlayed) { architectPlayed = true; playArchitectAnimation(); } });
   }, { threshold: 0.5 });
   if (archSection) archObserver.observe(archSection);
+
   function playArchitectAnimation() {
     var stud = document.querySelector('.arch-stud');
     var baseBricks = document.querySelectorAll('.arch-brick');
@@ -1135,154 +943,54 @@ document.addEventListener('DOMContentLoaded', function() {
     var titleLetters = document.querySelectorAll('.arch-title span');
     var tagline = document.querySelector('.arch-tagline');
     var scrollHint = document.querySelector('.arch-scroll-hint');
-    // T=0: Stud fades in
-    if (stud) {
-      stud.style.transition = 'opacity .5s, transform .6s, box-shadow .3s';
-      stud.style.opacity = '1';
-      stud.style.animation = 'pulse 0.6s ease infinite alternate';
-    }
-    // T=0.6: Flash
+    if (stud) { stud.style.transition = 'opacity .5s, transform .6s, box-shadow .3s'; stud.style.opacity = '1'; stud.style.animation = 'pulse 0.6s ease infinite alternate'; }
+    setTimeout(function() { if (stud) { stud.style.boxShadow = '0 0 80px rgba(255,215,0,0.9)'; setTimeout(function() { stud.style.boxShadow = '0 0 0 rgba(255,215,0,0)'; }, 300); } }, 600);
+    setTimeout(function() { baseBricks.forEach(function(b, i) { setTimeout(function() { b.style.transition = 'all .3s cubic-bezier(.175,.885,.32,1.275)'; b.style.opacity = '1'; b.style.transform = 'scale(1)'; }, i * 30); }); }, 1000);
     setTimeout(function() {
-      if (stud) {
-        stud.style.boxShadow = '0 0 80px rgba(255,215,0,0.9)';
-        setTimeout(function() { stud.style.boxShadow = '0 0 0 rgba(255,215,0,0)'; }, 300);
-      }
-    }, 600);
-    // T=1.0: Baseplate bricks
-    setTimeout(function() {
-      baseBricks.forEach(function(b, i) {
-        setTimeout(function() {
-          b.style.transition = 'all .3s cubic-bezier(.175,.885,.32,1.275)';
-          b.style.opacity = '1';
-          b.style.transform = 'scale(1)';
-        }, i * 30);
-      });
-    }, 1000);
-    // T=2.0: Towers
-    setTimeout(function() {
-      [towerBronze, towerSilver, towerGold].forEach(function(t, i) {
-        setTimeout(function() {
-          if (t) { t.style.transition = 'transform .8s cubic-bezier(.175,.885,.32,1.275)'; t.style.transform = 'scaleY(1)'; }
-        }, i * 200);
-      });
-      setTimeout(function() {
-        towerLabels.forEach(function(l) { l.style.transition = 'opacity .5s'; l.style.opacity = '1'; });
-      }, 800);
+      [towerBronze, towerSilver, towerGold].forEach(function(t, i) { setTimeout(function() { if (t) { t.style.transition = 'transform .8s cubic-bezier(.175,.885,.32,1.275)'; t.style.transform = 'scaleY(1)'; } }, i * 200); });
+      setTimeout(function() { towerLabels.forEach(function(l) { l.style.transition = 'opacity .5s'; l.style.opacity = '1'; }); }, 800);
     }, 2000);
-    // T=3.8: Title letters
-    setTimeout(function() {
-      titleLetters.forEach(function(l, i) {
-        setTimeout(function() {
-          l.style.transition = 'all .4s cubic-bezier(.175,.885,.32,1.275)';
-          l.style.transform = 'translateY(0)';
-          l.style.opacity = '1';
-        }, i * 60);
-      });
-      if (titleEl) { titleEl.style.opacity = '1'; }
-    }, 3800);
-    // T=4.5: Tagline
-    setTimeout(function() {
-      if (tagline) { tagline.style.transition = 'opacity .8s'; tagline.style.opacity = '1'; }
-    }, 4500);
-    // T=5.0: Scroll hint
-    setTimeout(function() {
-      if (scrollHint) { scrollHint.style.transition = 'opacity .5s'; scrollHint.style.opacity = '1'; }
-    }, 5000);
+    setTimeout(function() { titleLetters.forEach(function(l, i) { setTimeout(function() { l.style.transition = 'all .4s cubic-bezier(.175,.885,.32,1.275)'; l.style.transform = 'translateY(0)'; l.style.opacity = '1'; }, i * 60); }); if (titleEl) { titleEl.style.opacity = '1'; } }, 3800);
+    setTimeout(function() { if (tagline) { tagline.style.transition = 'opacity .8s'; tagline.style.opacity = '1'; } }, 4500);
+    setTimeout(function() { if (scrollHint) { scrollHint.style.transition = 'opacity .5s'; scrollHint.style.opacity = '1'; } }, 5000);
   }
 
-  // ========== SECTION 08 — BUILD LOG STEPS ==========
   var logSteps = document.querySelectorAll('.log-step');
   var logLineFill = document.getElementById('log-line-fill');
   var logObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        var visibleCount = document.querySelectorAll('.log-step.visible').length;
-        if (logLineFill) {
-          logLineFill.style.height = ((visibleCount / logSteps.length) * 100) + '%';
-        }
-      }
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); var visibleCount = document.querySelectorAll('.log-step.visible').length; if (logLineFill) { logLineFill.style.height = ((visibleCount / logSteps.length) * 100) + '%'; } }
     });
   }, observerOptions);
   logSteps.forEach(function(s) { logObserver.observe(s); });
 
-  // ========== SECTION 09 — MOTIVATION WORDS ==========
   var quoteEl = document.getElementById('motivation-quote');
   if (quoteEl) {
     var text = quoteEl.textContent.trim();
     quoteEl.innerHTML = '';
-    text.split(' ').forEach(function(word, i) {
-      var span = document.createElement('span');
-      span.className = 'word';
-      span.textContent = word;
-      span.style.animationDelay = (i * 80) + 'ms';
-      quoteEl.appendChild(span);
-      quoteEl.appendChild(document.createTextNode(' '));
-    });
-
+    text.split(' ').forEach(function(word, i) { var span = document.createElement('span'); span.className = 'word'; span.textContent = word; span.style.animationDelay = (i * 80) + 'ms'; quoteEl.appendChild(span); quoteEl.appendChild(document.createTextNode(' ')); });
     var quoteObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          quoteEl.querySelectorAll('.word').forEach(function(w, i) {
-            setTimeout(function() {
-              w.style.transition = 'all .4s ease';
-              w.style.opacity = '1';
-              w.style.transform = 'translateY(0)';
-            }, i * 80);
-          });
-        }
-      });
+      entries.forEach(function(entry) { if (entry.isIntersecting) { quoteEl.querySelectorAll('.word').forEach(function(w, i) { setTimeout(function() { w.style.transition = 'all .4s ease'; w.style.opacity = '1'; w.style.transform = 'translateY(0)'; }, i * 80); }); } });
     }, observerOptions);
     quoteObserver.observe(quoteEl);
   }
 
-  // Timeline animation
   var timelineEl = document.querySelector('.timeline');
   if (timelineEl) {
     var tlObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          var fills = entry.target.querySelectorAll('.tl-line-fill');
-          fills.forEach(function(f, i) {
-            setTimeout(function() { f.style.width = '100%'; }, i * 500 + 500);
-          });
-        }
-      });
+      entries.forEach(function(entry) { if (entry.isIntersecting) { entry.target.querySelectorAll('.tl-line-fill').forEach(function(f, i) { setTimeout(function() { f.style.width = '100%'; }, i * 500 + 500); }); } });
     }, observerOptions);
     tlObserver.observe(timelineEl);
   }
 
-  // Ghost bricks parallax
   var ghostBricks = document.querySelectorAll('.ghost-brick');
-  window.addEventListener('scroll', function() {
-    var scrollY = window.scrollY;
-    ghostBricks.forEach(function(b) {
-      b.style.transform = 'rotate(var(--rot)) translateY(' + (-scrollY * 0.3) + 'px)';
-    });
-  });
+  window.addEventListener('scroll', function() { var scrollY = window.scrollY; ghostBricks.forEach(function(b) { b.style.transform = 'rotate(var(--rot)) translateY(' + (-scrollY * 0.3) + 'px)'; }); });
 
-  // ========== SECTION 10 — CONNECT HEADING ==========
   var connectHeading = document.getElementById('connect-heading');
   if (connectHeading) {
-    "Let's Build Something.".split('').forEach(function(ch) {
-      var span = document.createElement('span');
-      span.textContent = ch === ' ' ? '\u00A0' : ch;
-      connectHeading.appendChild(span);
-    });
-
+    "Let's Build Something.".split('').forEach(function(ch) { var span = document.createElement('span'); span.textContent = ch === ' ' ? '\u00A0' : ch; connectHeading.appendChild(span); });
     var connectObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          connectHeading.querySelectorAll('span').forEach(function(s, i) {
-            setTimeout(function() {
-              s.style.transition = 'all .3s cubic-bezier(.175,.885,.32,1.275)';
-              s.style.opacity = '1';
-              s.style.transform = 'translateY(0)';
-            }, i * 60);
-          });
-          fireConfetti();
-        }
-      });
+      entries.forEach(function(entry) { if (entry.isIntersecting) { connectHeading.querySelectorAll('span').forEach(function(s, i) { setTimeout(function() { s.style.transition = 'all .3s cubic-bezier(.175,.885,.32,1.275)'; s.style.opacity = '1'; s.style.transform = 'translateY(0)'; }, i * 60); }); fireConfetti(); } });
     }, { threshold: 0.3 });
     connectObserver.observe(connectHeading);
   }
@@ -1291,41 +999,17 @@ document.addEventListener('DOMContentLoaded', function() {
     var container = document.getElementById('confetti-container');
     if (!container) return;
     var colors = ['#E3000B', '#FFD700', '#006CB7', '#00A850', '#FF9900'];
-    for (var i = 0; i < 60; i++) {
-      var piece = document.createElement('div');
-      piece.className = 'confetti-piece';
-      piece.style.background = colors[i % colors.length];
-      piece.style.left = (40 + Math.random() * 20) + '%';
-      piece.style.top = (40 + Math.random() * 20) + '%';
-      piece.style.setProperty('--tx', (Math.random() * 400 - 200) + 'px');
-      piece.style.setProperty('--ty', (Math.random() * 400 - 200) + 'px');
-      piece.style.animationDelay = (Math.random() * 0.5) + 's';
-      container.appendChild(piece);
-    }
+    for (var i = 0; i < 60; i++) { var piece = document.createElement('div'); piece.className = 'confetti-piece'; piece.style.background = colors[i % colors.length]; piece.style.left = (40 + Math.random() * 20) + '%'; piece.style.top = (40 + Math.random() * 20) + '%'; piece.style.setProperty('--tx', (Math.random() * 400 - 200) + 'px'); piece.style.setProperty('--ty', (Math.random() * 400 - 200) + 'px'); piece.style.animationDelay = (Math.random() * 0.5) + 's'; container.appendChild(piece); }
     setTimeout(function() { container.innerHTML = ''; }, 2000);
   }
 
-  // ========== STAT COUNT-UP ==========
   var statNums = document.querySelectorAll('.stat-num[data-target]');
   var statObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        var el = entry.target;
-        var target = parseInt(el.dataset.target);
-        var current = 0;
-        var step = Math.max(1, Math.floor(target / 40));
-        var interval = setInterval(function() {
-          current += step;
-          if (current >= target) { current = target; clearInterval(interval); }
-          el.textContent = current;
-        }, 30);
-        statObserver.unobserve(el);
-      }
+      if (entry.isIntersecting) { var el = entry.target; var target = parseInt(el.dataset.target); var current = 0; var step = Math.max(1, Math.floor(target / 40)); var interval = setInterval(function() { current += step; if (current >= target) { current = target; clearInterval(interval); } el.textContent = current; }, 30); statObserver.unobserve(el); }
     });
   }, observerOptions);
   statNums.forEach(function(s) { statObserver.observe(s); });
-
-
 
 });
 </script>
