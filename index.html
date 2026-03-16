@@ -142,14 +142,57 @@ section{position:relative;overflow:hidden}
 .bp-card:nth-child(2){border-color:#006CB7}.bp-card:nth-child(2) .stud-icon{background:#006CB7}
 .bp-card:nth-child(3){border-color:#FFD700}.bp-card:nth-child(3) .stud-icon{background:#FFD700}
 
-/* ========== SECTION 03 — RAW TO READY ========== */
+/* ========== SECTION 03 — DATA SOURCES ========== */
+#data-sources{background:#0D0D1A;padding:100px 60px;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center}
+#data-sources .ds-heading{font-size:clamp(36px,6vw,64px);color:#FFD700;text-align:center;margin-bottom:12px;opacity:0;transform:translateY(30px);transition:all .6s ease}
+#data-sources .ds-heading.visible{opacity:1;transform:translateY(0)}
+#data-sources .ds-subtitle{font-size:clamp(16px,2vw,20px);color:rgba(255,255,255,0.7);text-align:center;margin-bottom:48px;opacity:0;transform:translateY(30px);transition:all .6s ease .1s}
+#data-sources .ds-subtitle.visible{opacity:1;transform:translateY(0)}
+.ds-cards{display:grid;grid-template-columns:1fr 1fr;gap:40px;max-width:1100px;width:100%;margin-bottom:48px}
+.ds-card{background:#1A1A2E;padding:36px;border-radius:8px;position:relative;overflow:hidden;
+  transition:transform .3s,box-shadow .3s;opacity:0}
+.ds-card:hover{transform:translateY(-8px);filter:brightness(1.05)}
+.ds-card:nth-child(1){border-left:6px solid #E3000B;border-top:3px solid #E3000B;transform:translateX(-60px)}
+.ds-card:nth-child(2){border-left:6px solid #006CB7;border-top:3px solid #006CB7;transform:translateX(60px)}
+.ds-card.visible:nth-child(1){opacity:1;transform:translateX(0)}
+.ds-card.visible:nth-child(2){opacity:1;transform:translateX(0)}
+.ds-card-icon{width:64px;height:64px;margin-bottom:16px}
+.ds-card h3{font-size:36px;color:#fff;margin-bottom:8px}
+.ds-badge{display:inline-block;padding:4px 14px;border-radius:20px;font-size:13px;font-weight:800;color:#fff;margin-bottom:20px}
+.ds-badge-red{background:#E3000B}
+.ds-badge-blue{background:#006CB7}
+.ds-row{margin-bottom:12px}
+.ds-row-label{font-weight:800;font-size:14px;color:#FFD700;text-transform:uppercase;letter-spacing:1px}
+.ds-row-value{font-size:15px;color:rgba(255,255,255,0.8);line-height:1.6}
+.ds-stream{position:absolute;bottom:0;left:0;width:100%;height:24px;overflow:hidden;opacity:0.3}
+.ds-stream-line{position:absolute;height:2px;border-radius:1px;animation:streamFlow 2s linear infinite}
+@keyframes streamFlow{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.ds-dots{position:absolute;bottom:12px;right:12px;width:60px;height:60px;animation:rotateDots 8s linear infinite;opacity:0.25}
+@keyframes rotateDots{to{transform:rotateY(360deg)}}
+.ds-funnel{text-align:center;margin-top:8px}
+.ds-funnel svg{width:120px;height:60px}
+.ds-funnel-label{font-size:14px;font-style:italic;color:rgba(255,255,255,0.5);margin-top:8px}
+.ds-funnel-arrow{animation:pulseFunnel 1.5s ease infinite}
+@keyframes pulseFunnel{0%,100%{opacity:0.5}50%{opacity:1}}
+
+/* ========== SECTION 04 — RAW TO READY ========== */
 #raw-to-ready{background:#0D0D1A;min-height:500vh;position:relative}
 .journey-container{display:flex;position:sticky;top:0;height:100vh}
 .journey-left{width:30%;padding:60px 40px;display:flex;flex-direction:column;justify-content:center;position:relative}
 .journey-right{width:70%;display:flex;align-items:center;justify-content:center;padding:40px;position:relative}
-.stage-name{font-size:clamp(28px,3vw,42px);color:#FFD700;margin-bottom:16px;transition:all .5s}
-.progress-track{width:6px;height:300px;background:rgba(255,255,255,0.1);border-radius:3px;position:relative}
-.progress-fill{width:100%;background:#FFD700;border-radius:3px;transition:height .5s;height:0}
+.stage-name{font-size:clamp(28px,3vw,42px);color:#FFD700;margin-bottom:8px;transition:all .3s}
+.stage-subtitle{font-size:clamp(14px,1.5vw,18px);color:rgba(255,255,255,0.6);margin-bottom:16px;font-weight:700;transition:all .3s}
+.stage-desc{font-size:clamp(14px,1.3vw,16px);color:rgba(255,255,255,0.7);line-height:1.7;margin-bottom:20px;transition:all .3s;max-width:320px}
+.stage-chips{display:flex;gap:8px;flex-wrap:wrap}
+.stage-chip{padding:6px 16px;border-radius:20px;font-size:12px;font-weight:800;text-transform:uppercase;
+  letter-spacing:1px;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.4);transition:all .3s}
+.stage-chip.active{color:#fff}
+.stage-chip[data-stage="bronze"].active{background:rgba(205,127,50,0.3);color:#CD7F32}
+.stage-chip[data-stage="silver"].active{background:rgba(168,169,173,0.3);color:#A8A9AD}
+.stage-chip[data-stage="gold"].active{background:rgba(255,215,0,0.3);color:#FFD700}
+.stage-chip[data-stage="ml-ready"].active{background:rgba(0,168,80,0.3);color:#00A850}
+.progress-track{width:6px;height:300px;background:rgba(255,255,255,0.1);border-radius:3px;position:relative;overflow:hidden;margin-top:20px}
+.progress-fill{width:100%;border-radius:3px;height:0;background:linear-gradient(to bottom,#CD7F32 0%,#CD7F32 25%,#A8A9AD 25%,#A8A9AD 50%,#FFD700 50%,#FFD700 75%,#00A850 75%,#00A850 100%)}
 .stage-panel{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
   width:80%;max-width:600px;opacity:0;transition:all .6s;text-align:center;pointer-events:none}
 .stage-panel.active{opacity:1;pointer-events:auto}
@@ -158,8 +201,8 @@ section{position:relative;overflow:hidden}
 .stage-badge{display:inline-block;padding:8px 24px;border-radius:6px;font-weight:800;
   font-size:14px;margin-top:16px;text-transform:uppercase}
 
-/* Three.js canvas */
-#brick-canvas{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
+/* Small Three.js brick — bottom-right corner only */
+#brick-canvas{position:absolute;bottom:24px;right:24px;width:120px;height:120px;pointer-events:none;z-index:3;opacity:0.85}
 
 /* ========== TRANSITION BANNER — ARCHITECTURE ========== */
 .arch-banner{background:#0D0D1A;padding:48px 60px;display:flex;align-items:center;justify-content:center;gap:40px;
@@ -179,7 +222,7 @@ section{position:relative;overflow:hidden}
 .arch-banner-glow{position:absolute;top:50%;left:50%;width:200px;height:200px;border-radius:50%;
   background:radial-gradient(circle,rgba(255,215,0,0.08),transparent 70%);transform:translate(-50%,-50%);pointer-events:none}
 
-/* ========== SECTION 05 — MEDALLION ========== */
+/* ========== SECTION 06 — MEDALLION ========== */
 #medallion{background:#06142E;padding:100px 60px;position:relative;
   background-image:radial-gradient(circle,rgba(255,255,255,0.04) 1px,transparent 1px);
   background-size:20px 20px}
@@ -216,7 +259,7 @@ section{position:relative;overflow:hidden}
 .stat-num{font-size:clamp(36px,5vw,64px);color:#FFD700;font-family:'Fredoka One',cursive}
 .stat-label{font-size:14px;color:rgba(255,255,255,0.6);margin-top:4px}
 
-/* ========== SECTION 06 — TOOLBOX ========== */
+/* ========== SECTION 07 — TOOLBOX ========== */
 #toolbox{background:#FFD700;color:#1A1A2E;padding:100px 60px}
 #toolbox h2{font-size:clamp(40px,5vw,64px);text-align:center;margin-bottom:60px}
 .tool-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
@@ -230,7 +273,7 @@ section{position:relative;overflow:hidden}
 .tool-name{font-weight:800;font-size:18px;margin-bottom:8px}
 .tool-desc{font-size:14px;color:#555;line-height:1.5}
 
-/* ========== SECTION 07 — BUILD LOG ========== */
+/* ========== SECTION 08 — BUILD LOG ========== */
 #build-log{background:#fff;color:#1A1A2E;padding:100px 60px;
   background-image:radial-gradient(circle,rgba(0,0,0,0.04) 1px,transparent 1px);
   background-size:20px 20px}
@@ -248,7 +291,7 @@ section{position:relative;overflow:hidden}
 .step-content h3{font-size:20px;font-weight:800;margin-bottom:8px}
 .step-content p{font-size:16px;line-height:1.7;color:#444}
 
-/* ========== SECTION 08 — WHY THIS EXISTS ========== */
+/* ========== SECTION 09 — WHY THIS EXISTS ========== */
 #motivation{background:linear-gradient(to bottom,#8B0000,#0D0D1A);padding:120px 60px;
   position:relative;overflow:hidden;min-height:80vh;display:flex;flex-direction:column;
   align-items:center;justify-content:center;text-align:center}
@@ -269,7 +312,7 @@ section{position:relative;overflow:hidden}
 .ghost-brick{position:absolute;width:60px;height:24px;border-radius:3px;
   background:rgba(255,255,255,0.04);transform:rotate(var(--rot))}
 
-/* ========== SECTION 09 — CONNECT ========== */
+/* ========== SECTION 10 — CONNECT ========== */
 #connect{background:#0D0D1A;padding:120px 60px;text-align:center;position:relative;overflow:hidden}
 .connect-photo{width:80px;height:80px;border-radius:50%;border:4px solid #FFD700;
   object-fit:cover;margin:0 auto 16px}
@@ -290,6 +333,7 @@ section{position:relative;overflow:hidden}
 @media(max-width:1024px){
   .blueprint-cards,.medallion-cols{grid-template-columns:repeat(2,1fr)}
   .tool-grid{grid-template-columns:repeat(2,1fr)}
+  .ds-cards{grid-template-columns:1fr}
 }
 @media(max-width:768px){
   .sidebar{display:none}
@@ -304,6 +348,10 @@ section{position:relative;overflow:hidden}
   .journey-right{width:100%;min-height:60vh}
   .arch-banner{flex-direction:column;padding:32px 24px;gap:20px}
   .arch-banner-text{text-align:center}
+  .ds-cards{grid-template-columns:1fr}
+  .ds-card:nth-child(1),.ds-card:nth-child(2){border-left:none;border-top-width:6px}
+  .ds-funnel svg{display:none}
+  .ds-funnel-arrow-mobile{display:block;font-size:32px;color:#FFD700}
   .stats-row{gap:24px}
   section{padding-left:24px!important;padding-right:24px!important}
 }
@@ -320,6 +368,7 @@ section{position:relative;overflow:hidden}
 /* ========== UTILITY ========== */
 .reveal{opacity:0;transform:translateY(30px);transition:all .7s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
+.ds-funnel-arrow-mobile{display:none}
 </style>
 </head>
 <body>
@@ -327,7 +376,7 @@ section{position:relative;overflow:hidden}
 <!-- Skip Link -->
 <a href="#hero" class="skip-link">Skip to content</a>
 
-<!-- Sidebar Navigation -->
+<!-- Sidebar Navigation (10 sections) -->
 <nav class="sidebar" aria-label="Main navigation">
   <a href="#hero" class="sidebar-item active" data-section="hero">
     <div class="sidebar-num">01</div>
@@ -337,28 +386,36 @@ section{position:relative;overflow:hidden}
     <div class="sidebar-num">02</div>
     <span class="sidebar-label">The Blueprint</span>
   </a>
-  <a href="#raw-to-ready" class="sidebar-item" data-section="raw-to-ready">
+  <a href="#data-sources" class="sidebar-item" data-section="data-sources">
     <div class="sidebar-num">03</div>
+    <span class="sidebar-label">Data Sources</span>
+  </a>
+  <a href="#raw-to-ready" class="sidebar-item" data-section="raw-to-ready">
+    <div class="sidebar-num">04</div>
     <span class="sidebar-label">Raw to Ready</span>
   </a>
   <a href="#medallion" class="sidebar-item" data-section="medallion">
-    <div class="sidebar-num">04</div>
+    <div class="sidebar-num">05</div>
+    <span class="sidebar-label">Architect Awakens</span>
+  </a>
+  <a href="#medallion" class="sidebar-item" data-section="medallion">
+    <div class="sidebar-num">06</div>
     <span class="sidebar-label">The Medallion</span>
   </a>
   <a href="#toolbox" class="sidebar-item" data-section="toolbox">
-    <div class="sidebar-num">05</div>
+    <div class="sidebar-num">07</div>
     <span class="sidebar-label">The Toolbox</span>
   </a>
   <a href="#build-log" class="sidebar-item" data-section="build-log">
-    <div class="sidebar-num">06</div>
+    <div class="sidebar-num">08</div>
     <span class="sidebar-label">Build Log</span>
   </a>
   <a href="#motivation" class="sidebar-item" data-section="motivation">
-    <div class="sidebar-num">07</div>
+    <div class="sidebar-num">09</div>
     <span class="sidebar-label">Why This Exists</span>
   </a>
   <a href="#connect" class="sidebar-item" data-section="connect">
-    <div class="sidebar-num">08</div>
+    <div class="sidebar-num">10</div>
     <span class="sidebar-label">Connect</span>
   </a>
 </nav>
@@ -367,12 +424,14 @@ section{position:relative;overflow:hidden}
 <nav class="bottom-nav" aria-label="Mobile navigation">
   <div class="bottom-nav-item active" data-target="hero">01</div>
   <div class="bottom-nav-item" data-target="blueprint">02</div>
-  <div class="bottom-nav-item" data-target="raw-to-ready">03</div>
-  <div class="bottom-nav-item" data-target="medallion">04</div>
-  <div class="bottom-nav-item" data-target="toolbox">05</div>
-  <div class="bottom-nav-item" data-target="build-log">06</div>
-  <div class="bottom-nav-item" data-target="motivation">07</div>
-  <div class="bottom-nav-item" data-target="connect">08</div>
+  <div class="bottom-nav-item" data-target="data-sources">03</div>
+  <div class="bottom-nav-item" data-target="raw-to-ready">04</div>
+  <div class="bottom-nav-item" data-target="medallion">05</div>
+  <div class="bottom-nav-item" data-target="medallion">06</div>
+  <div class="bottom-nav-item" data-target="toolbox">07</div>
+  <div class="bottom-nav-item" data-target="build-log">08</div>
+  <div class="bottom-nav-item" data-target="motivation">09</div>
+  <div class="bottom-nav-item" data-target="connect">10</div>
 </nav>
 
 <div class="main-content" id="main-content">
@@ -400,42 +459,38 @@ section{position:relative;overflow:hidden}
     </div>
     <h1 class="hero-name">Jayrajsinh Zala</h1>
     <div class="role-badge">Data Engineer</div>
-    <p class="hero-tagline">I build pipelines that turn raw chaos into ML-ready gold.</p>
+    <p class="hero-tagline">I build pipelines that turn raw chaos into ML-ready gold. Currently obsessed with bringing LEGO into the AI future.</p>
     <div class="tech-pills">
-      <span class="pill" style="background:#FF9900;animation-delay:3.6s">AWS</span>
-      <span class="pill" style="background:#0078D4;animation-delay:3.7s">Azure</span>
-      <span class="pill" style="background:#B8860B;animation-delay:3.8s">Python</span>
-      <span class="pill" style="background:#00A850;animation-delay:3.9s">SQL</span>
-      <span class="pill" style="background:#E3000B;animation-delay:4.0s">PySpark</span>
-      <span class="pill" style="background:#1A9E9E;animation-delay:4.1s">Databricks</span>
+      <span class="pill" style="background:#E3000B;animation-delay:3.6s">Python</span>
+      <span class="pill" style="background:#006CB7;animation-delay:3.8s">PySpark</span>
+      <span class="pill" style="background:#00A850;animation-delay:4.0s">Databricks</span>
+      <span class="pill" style="background:#B8860B;animation-delay:4.2s">AWS</span>
+      <span class="pill" style="background:#800080;animation-delay:4.4s">Azure</span>
     </div>
     <div class="hero-ctas">
-      <a href="#raw-to-ready" class="brick-btn brick-btn-yellow">Explore the Pipeline ↓</a>
-      <a href="https://github.com/carzy-zala/LEGO-3D-Asset-Data-Pipeline" target="_blank" rel="noopener noreferrer" class="brick-btn brick-btn-blue">GitHub Repo ↗</a>
+      <a href="https://github.com/carzy-zala/LEGO-3D-Asset-Data-Pipeline" target="_blank" rel="noopener noreferrer" class="brick-btn brick-btn-yellow">View the Pipeline ↗</a>
+      <a href="#connect" class="brick-btn brick-btn-blue">Let's Connect</a>
     </div>
   </div>
   <div class="hero-right">
     <div class="floating-bricks">
       <div class="float-brick" style="background:#E3000B;left:10%;animation-duration:8s;animation-delay:0s"></div>
-      <div class="float-brick" style="background:#006CB7;left:30%;animation-duration:10s;animation-delay:1s;width:60px"></div>
-      <div class="float-brick" style="background:#FFD700;left:55%;animation-duration:7s;animation-delay:2s"></div>
-      <div class="float-brick" style="background:#00A850;left:75%;animation-duration:9s;animation-delay:0.5s;width:100px"></div>
-      <div class="float-brick" style="background:#E3000B;left:45%;animation-duration:11s;animation-delay:3s;width:50px"></div>
-      <div class="float-brick" style="background:#006CB7;left:85%;animation-duration:8.5s;animation-delay:1.5s"></div>
+      <div class="float-brick" style="background:#006CB7;left:30%;animation-duration:12s;animation-delay:2s"></div>
+      <div class="float-brick" style="background:#FFD700;left:50%;animation-duration:10s;animation-delay:1s"></div>
+      <div class="float-brick" style="background:#00A850;left:70%;animation-duration:9s;animation-delay:3s"></div>
+      <div class="float-brick" style="background:#FF9900;left:85%;animation-duration:11s;animation-delay:0.5s"></div>
     </div>
-    <div class="fall-brick" style="background:#E3000B;top:200px;right:100px;animation-delay:.2s"></div>
-    <div class="fall-brick" style="background:#006CB7;top:240px;right:100px;animation-delay:.5s"></div>
-    <div class="fall-brick" style="background:#FFD700;top:280px;right:100px;animation-delay:.8s"></div>
-    <div class="fall-brick" style="background:#00A850;top:240px;right:210px;animation-delay:1.1s"></div>
-    <div class="fall-brick" style="background:#E3000B;top:200px;right:210px;animation-delay:1.4s;width:120px"></div>
-    <div class="fall-brick" style="background:#006CB7;top:160px;right:150px;animation-delay:1.7s;width:130px"></div>
+    <div class="fall-brick" style="background:#E3000B;top:60px;right:80px;animation-delay:.5s"></div>
+    <div class="fall-brick" style="background:#006CB7;top:140px;right:200px;animation-delay:.8s"></div>
+    <div class="fall-brick" style="background:#FFD700;top:220px;right:120px;animation-delay:1.1s"></div>
+    <div class="fall-brick" style="background:#00A850;top:300px;right:260px;animation-delay:1.4s"></div>
   </div>
 </section>
 
 <!-- ==================== SECTION 02 — BLUEPRINT ==================== -->
 <section id="blueprint">
   <h2>THE BLUEPRINT</h2>
-  <p class="subtitle">Two raw data sources — LDraw 3D geometry files and Rebrickable catalogue CSVs — are individually unusable for AI model training. This pipeline bridges the gap.</p>
+  <p class="subtitle">A Medallion Architecture pipeline that transforms raw, fragmented LEGO data into structured, enriched, ML-ready datasets.</p>
   <div class="blueprint-cards">
     <div class="bp-card">
       <div class="stud-icon"></div>
@@ -458,39 +513,145 @@ section{position:relative;overflow:hidden}
   </div>
 </section>
 
-<!-- ==================== SECTION 03 — RAW TO READY ==================== -->
+<!-- ==================== SECTION 03 — DATA SOURCES ==================== -->
+<section id="data-sources">
+  <h2 class="ds-heading">WHERE IT ALL BEGINS</h2>
+  <p class="ds-subtitle">Two sources. Millions of data points. One pipeline.</p>
+  <div class="ds-cards">
+    <!-- Card 1: Rebrickable -->
+    <div class="ds-card">
+      <svg class="ds-card-icon" viewBox="0 0 64 64" fill="none">
+        <rect x="4" y="4" width="12" height="12" rx="2" fill="#E3000B"/>
+        <rect x="20" y="4" width="12" height="12" rx="2" fill="#E3000B" opacity="0.7"/>
+        <rect x="36" y="4" width="12" height="12" rx="2" fill="#E3000B" opacity="0.5"/>
+        <rect x="52" y="4" width="8" height="12" rx="2" fill="#E3000B" opacity="0.3"/>
+        <rect x="4" y="20" width="12" height="12" rx="2" fill="#E3000B" opacity="0.7"/>
+        <rect x="20" y="20" width="12" height="12" rx="2" fill="#E3000B"/>
+        <rect x="36" y="20" width="12" height="12" rx="2" fill="#E3000B" opacity="0.7"/>
+        <rect x="52" y="20" width="8" height="12" rx="2" fill="#E3000B" opacity="0.5"/>
+        <rect x="4" y="36" width="12" height="12" rx="2" fill="#E3000B" opacity="0.5"/>
+        <rect x="20" y="36" width="12" height="12" rx="2" fill="#E3000B" opacity="0.7"/>
+        <rect x="36" y="36" width="12" height="12" rx="2" fill="#E3000B"/>
+        <rect x="52" y="36" width="8" height="12" rx="2" fill="#E3000B" opacity="0.7"/>
+        <rect x="4" y="52" width="12" height="8" rx="2" fill="#E3000B" opacity="0.3"/>
+        <rect x="20" y="52" width="12" height="8" rx="2" fill="#E3000B" opacity="0.5"/>
+        <rect x="36" y="52" width="12" height="8" rx="2" fill="#E3000B" opacity="0.7"/>
+        <rect x="52" y="52" width="8" height="8" rx="2" fill="#E3000B"/>
+      </svg>
+      <h3>Rebrickable</h3>
+      <span class="ds-badge ds-badge-red">Catalogue Data</span>
+      <div class="ds-row">
+        <div class="ds-row-label">Format</div>
+        <div class="ds-row-value">CSV files</div>
+      </div>
+      <div class="ds-row">
+        <div class="ds-row-label">Contains</div>
+        <div class="ds-row-value">Part IDs, colors, categories, dimensions, set membership, part relationships</div>
+      </div>
+      <div class="ds-row">
+        <div class="ds-row-label">Scale</div>
+        <div class="ds-row-value">70,000+ unique parts, 200+ colors, 11,000+ sets</div>
+      </div>
+      <div class="ds-row">
+        <div class="ds-row-label">Role in Pipeline</div>
+        <div class="ds-row-value">Semantic enrichment layer — provides the human-readable metadata that gives raw geometry its meaning</div>
+      </div>
+      <div class="ds-stream">
+        <div class="ds-stream-line" style="top:4px;width:60%;background:#E3000B;animation-delay:0s"></div>
+        <div class="ds-stream-line" style="top:8px;width:45%;background:#E3000B;animation-delay:0.3s"></div>
+        <div class="ds-stream-line" style="top:12px;width:70%;background:#E3000B;animation-delay:0.6s"></div>
+        <div class="ds-stream-line" style="top:16px;width:50%;background:#E3000B;animation-delay:0.9s"></div>
+        <div class="ds-stream-line" style="top:20px;width:55%;background:#E3000B;animation-delay:1.2s"></div>
+      </div>
+    </div>
+    <!-- Card 2: LDraw -->
+    <div class="ds-card">
+      <svg class="ds-card-icon" viewBox="0 0 64 64" fill="none">
+        <path d="M32 4L4 20v24l28 16 28-16V20L32 4z" stroke="#006CB7" stroke-width="2" fill="none"/>
+        <path d="M32 4v36" stroke="#006CB7" stroke-width="1.5" opacity="0.5"/>
+        <path d="M4 20l28 20" stroke="#006CB7" stroke-width="1.5" opacity="0.5"/>
+        <path d="M60 20L32 40" stroke="#006CB7" stroke-width="1.5" opacity="0.5"/>
+        <path d="M18 12l28 16" stroke="#006CB7" stroke-width="1" opacity="0.3"/>
+        <path d="M46 12L18 28" stroke="#006CB7" stroke-width="1" opacity="0.3"/>
+      </svg>
+      <h3>LDraw</h3>
+      <span class="ds-badge ds-badge-blue">Geometry Data</span>
+      <div class="ds-row">
+        <div class="ds-row-label">Format</div>
+        <div class="ds-row-value">.dat files</div>
+      </div>
+      <div class="ds-row">
+        <div class="ds-row-label">Contains</div>
+        <div class="ds-row-value">3D vertex coordinates, subfile references, triangle/quad primitives, part hierarchy</div>
+      </div>
+      <div class="ds-row">
+        <div class="ds-row-label">Scale</div>
+        <div class="ds-row-value">10,000+ part geometry files, recursive sub-part references</div>
+      </div>
+      <div class="ds-row">
+        <div class="ds-row-label">Role in Pipeline</div>
+        <div class="ds-row-value">Geometric foundation — provides the 3D spatial data that defines every LEGO part's physical form</div>
+      </div>
+      <svg class="ds-dots" viewBox="0 0 60 60">
+        <circle cx="10" cy="10" r="2" fill="#006CB7"/>
+        <circle cx="30" cy="10" r="2" fill="#006CB7"/>
+        <circle cx="50" cy="10" r="2" fill="#006CB7"/>
+        <circle cx="20" cy="30" r="2" fill="#006CB7"/>
+        <circle cx="40" cy="30" r="2" fill="#006CB7"/>
+        <circle cx="10" cy="50" r="2" fill="#006CB7"/>
+        <circle cx="30" cy="50" r="2" fill="#006CB7"/>
+        <circle cx="50" cy="50" r="2" fill="#006CB7"/>
+      </svg>
+    </div>
+  </div>
+  <!-- Connecting funnel -->
+  <div class="ds-funnel">
+    <svg viewBox="0 0 120 60" fill="none">
+      <path d="M10 5 L60 50 L110 5" stroke="#FFD700" stroke-width="2" fill="none" class="ds-funnel-arrow"/>
+      <circle cx="60" cy="55" r="4" fill="#FFD700" class="ds-funnel-arrow"/>
+    </svg>
+    <span class="ds-funnel-arrow-mobile">↓</span>
+    <div class="ds-funnel-label">Into the Bronze Zone ↓</div>
+  </div>
+</section>
+
+<!-- ==================== SECTION 04 — RAW TO READY ==================== -->
 <section id="raw-to-ready">
-  <canvas id="brick-canvas"></canvas>
   <div class="journey-container">
     <div class="journey-left">
       <div class="stage-name" id="stage-name">RAW CHAOS</div>
+      <div class="stage-subtitle" id="stage-subtitle">Stage 1: Bronze Ingestion</div>
+      <div class="stage-desc" id="stage-desc">Raw .dat geometry files from LDraw and catalogue CSVs from Rebrickable arrive unvalidated. The ingestion layer performs raw landing — accepting LDraw and Rebrickable sources as-is into the Bronze zone.</div>
+      <div class="stage-chips">
+        <span class="stage-chip active" data-stage="bronze">BRONZE</span>
+        <span class="stage-chip" data-stage="silver">SILVER</span>
+        <span class="stage-chip" data-stage="gold">GOLD</span>
+        <span class="stage-chip" data-stage="ml-ready">ML-READY</span>
+      </div>
       <div class="progress-track">
         <div class="progress-fill" id="progress-fill"></div>
       </div>
     </div>
     <div class="journey-right">
+      <!-- Small Three.js brick in bottom-right corner -->
+      <canvas id="brick-canvas"></canvas>
       <div class="stage-panel active" id="stage-0">
         <h3 style="color:#CD7F32">Stage 1: Raw Chaos — Bronze Ingestion</h3>
         <p>Raw .dat geometry files from LDraw and catalogue CSVs from Rebrickable arrive unvalidated. The Ingestion layer performs raw landing — accepting LDraw and Rebrickable sources as-is into the Bronze zone.</p>
         <div class="stage-badge" style="background:#CD7F32;color:#fff">Bronze Layer</div>
       </div>
       <div class="stage-panel" id="stage-1">
-        <h3 style="color:#A8A9AD">Stage 2: Schema Detection</h3>
-        <p>Schema enforcement and deduplication begin. The pipeline validates column types, removes duplicate entries, and ensures every record conforms to the expected structure before advancing.</p>
-        <div class="stage-badge" style="background:#A8A9AD;color:#1A1A2E">Schema Enforced</div>
+        <h3 style="color:#A8A9AD">Stage 2: Cleaning the Bricks — Silver Layer</h3>
+        <p>Geometry resolution and metadata joining occur here. Invalid rows are flagged with <code>is_valid</code> and <code>issues</code> columns — never dropped. The recursive sub-part resolver ensures geometrically complete point clouds.</p>
+        <div class="stage-badge" style="background:#A8A9AD;color:#1A1A2E">Silver Layer</div>
       </div>
       <div class="stage-panel" id="stage-2">
-        <h3 style="color:#C0C0C0">Stage 3: Cleaning the Bricks — Silver Layer</h3>
-        <p>Geometry resolution and metadata joining occur here. Invalid rows are flagged with <code>is_valid</code> and <code>issues</code> columns — never dropped. The recursive sub-part resolver ensures geometrically complete point clouds.</p>
-        <div class="stage-badge" style="background:#C0C0C0;color:#1A1A2E">Silver Layer</div>
-      </div>
-      <div class="stage-panel" id="stage-3">
-        <h3 style="color:#FFD700">Stage 4: Building Intelligence — Gold Layer</h3>
+        <h3 style="color:#FFD700">Stage 3: Building Intelligence — Gold Layer</h3>
         <p>High-quality filtered records emerge. Feature engineering enriches each brick with part category, color name, year of production, and normalized geometry. The Gold layer filters to valid records for model output while preserving full lineage.</p>
         <div class="stage-badge" style="background:#FFD700;color:#1A1A2E">Gold Layer</div>
       </div>
-      <div class="stage-panel" id="stage-4">
-        <h3 style="color:#00A850">Stage 5: ML Ready — Output</h3>
+      <div class="stage-panel" id="stage-3">
+        <h3 style="color:#00A850">Stage 4: ML Ready — Output</h3>
         <p>Eight enriched JSON files per brick. NumPy point clouds of shape (N, 3) — N vertices with x, y, z coordinates. Directly consumable by PointNet and similar 3D ML architectures. Point cloud sizes range from 120 to 408 vertices.</p>
         <div class="stage-badge" style="background:#00A850;color:#fff;animation:pulse 2s infinite">Pipeline Complete ✓</div>
       </div>
@@ -533,7 +694,7 @@ section{position:relative;overflow:hidden}
   </div>
 </div>
 
-<!-- ==================== SECTION 05 — MEDALLION ==================== -->
+<!-- ==================== SECTION 06 — MEDALLION ==================== -->
 <section id="medallion">
   <h2>THE MEDALLION ARCHITECTURE</h2>
   <div class="medallion-cols">
@@ -591,7 +752,7 @@ section{position:relative;overflow:hidden}
   </div>
 </section>
 
-<!-- ==================== SECTION 06 — TOOLBOX ==================== -->
+<!-- ==================== SECTION 07 — TOOLBOX (LDraw card removed) ==================== -->
 <section id="toolbox">
   <h2>THE TOOLBOX</h2>
   <div class="tool-grid">
@@ -626,11 +787,6 @@ section{position:relative;overflow:hidden}
       <div class="tool-desc">Data querying, validation, and schema enforcement</div>
     </div>
     <div class="tool-card reveal">
-      <div class="tool-stud" style="background:rgba(128,128,128,0.15)"><div class="tool-stud-inner" style="background:#808080"></div></div>
-      <div class="tool-name">LDraw</div>
-      <div class="tool-desc">3D geometry file format for LEGO brick models</div>
-    </div>
-    <div class="tool-card reveal">
       <div class="tool-stud" style="background:rgba(128,0,128,0.15)"><div class="tool-stud-inner" style="background:#800080"></div></div>
       <div class="tool-name">JSON Schema</div>
       <div class="tool-desc">Structured validation for enriched output datasets</div>
@@ -643,7 +799,7 @@ section{position:relative;overflow:hidden}
   </div>
 </section>
 
-<!-- ==================== SECTION 07 — BUILD LOG ==================== -->
+<!-- ==================== SECTION 08 — BUILD LOG ==================== -->
 <section id="build-log">
   <h2>BUILD LOG</h2>
   <div class="log-steps">
@@ -693,7 +849,7 @@ section{position:relative;overflow:hidden}
   </div>
 </section>
 
-<!-- ==================== SECTION 08 — MOTIVATION ==================== -->
+<!-- ==================== SECTION 09 — MOTIVATION ==================== -->
 <section id="motivation">
   <div class="ghost-bricks">
     <div class="ghost-brick" style="top:5%;left:10%;--rot:15deg;width:80px;height:32px"></div>
@@ -725,7 +881,7 @@ section{position:relative;overflow:hidden}
   </div>
 </section>
 
-<!-- ==================== SECTION 09 — CONNECT ==================== -->
+<!-- ==================== SECTION 10 — CONNECT ==================== -->
 <section id="connect">
   <img src="https://avatars.githubusercontent.com/carzy-zala" alt="Jayrajsinh Zala" class="connect-photo" width="80" height="80" loading="lazy">
   <div class="connect-name">Jayrajsinh Zala</div>
@@ -798,24 +954,83 @@ document.addEventListener('DOMContentLoaded', function() {
   const bpCards = document.querySelector('.blueprint-cards');
   if (bpCards) cardObserver.observe(bpCards);
 
-  // ========== SECTION 03 — SCROLL JOURNEY ==========
-  const stageNames = ['RAW CHAOS', 'SCHEMA DETECTION', 'CLEANING THE BRICKS', 'BUILDING INTELLIGENCE', 'ML READY'];
-  const stageNameEl = document.getElementById('stage-name');
-  const progressFill = document.getElementById('progress-fill');
-  const rawSection = document.getElementById('raw-to-ready');
+  // ========== SECTION 03 — DATA SOURCES ANIMATION ==========
+  var dsHeading = document.querySelector('.ds-heading');
+  var dsSubtitle = document.querySelector('.ds-subtitle');
+  var dsCards = document.querySelectorAll('.ds-card');
+  if (dsHeading) {
+    var dsObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          dsHeading.classList.add('visible');
+          dsSubtitle.classList.add('visible');
+          dsCards.forEach(function(card, i) {
+            setTimeout(function() {
+              card.style.transition = 'all .7s ease';
+              card.classList.add('visible');
+            }, i * 150 + 300);
+          });
+        }
+      });
+    }, { threshold: 0.2 });
+    dsObserver.observe(dsHeading);
+  }
+
+  // ========== SECTION 04 — CONTINUOUS SCROLL JOURNEY ==========
+  var stageData = [
+    { name: 'RAW CHAOS', subtitle: 'Stage 1: Bronze Ingestion', desc: 'Raw .dat geometry files from LDraw and catalogue CSVs from Rebrickable arrive unvalidated. The ingestion layer performs raw landing — accepting LDraw and Rebrickable sources as-is into the Bronze zone.', chip: 'bronze' },
+    { name: 'CLEANING THE BRICKS', subtitle: 'Stage 2: Silver Layer', desc: 'Geometry resolution and metadata joining occur here. Invalid rows are flagged with is_valid and issues columns — never dropped. The recursive sub-part resolver ensures geometrically complete point clouds.', chip: 'silver' },
+    { name: 'BUILDING INTELLIGENCE', subtitle: 'Stage 3: Gold Layer', desc: 'High-quality filtered records emerge. Feature engineering enriches each brick with part category, color name, year of production, and normalized geometry. The Gold layer filters to valid records for model output while preserving full lineage.', chip: 'gold' },
+    { name: 'ML READY', subtitle: 'Stage 4: Output', desc: 'Eight enriched JSON files per brick. NumPy point clouds of shape (N, 3) — N vertices with x, y, z coordinates. Directly consumable by PointNet and similar 3D ML architectures. Point cloud sizes range from 120 to 408 vertices.', chip: 'ml-ready' }
+  ];
+
+  var stageNameEl = document.getElementById('stage-name');
+  var stageSubtitleEl = document.getElementById('stage-subtitle');
+  var stageDescEl = document.getElementById('stage-desc');
+  var stageChips = document.querySelectorAll('.stage-chip');
+  var progressFill = document.getElementById('progress-fill');
+  var rawSection = document.getElementById('raw-to-ready');
+  var currentStageIdx = -1;
+
+  function updateLeftPanel(idx) {
+    if (idx === currentStageIdx) return;
+    currentStageIdx = idx;
+    var data = stageData[idx];
+    // Crossfade: fade out
+    [stageNameEl, stageSubtitleEl, stageDescEl].forEach(function(el) {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(-10px)';
+    });
+    setTimeout(function() {
+      stageNameEl.textContent = data.name;
+      stageSubtitleEl.textContent = data.subtitle;
+      stageDescEl.textContent = data.desc;
+      stageChips.forEach(function(c) {
+        c.classList.toggle('active', c.dataset.stage === data.chip);
+      });
+      [stageNameEl, stageSubtitleEl, stageDescEl].forEach(function(el) {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      });
+    }, 300);
+  }
 
   if (rawSection) {
     window.addEventListener('scroll', function() {
-      const rect = rawSection.getBoundingClientRect();
-      const sectionHeight = rawSection.offsetHeight - window.innerHeight;
-      const scrolled = -rect.top;
-      const progress = Math.max(0, Math.min(1, scrolled / sectionHeight));
-      const stageIndex = Math.min(4, Math.floor(progress * 5));
+      var rect = rawSection.getBoundingClientRect();
+      var sectionHeight = rawSection.offsetHeight - window.innerHeight;
+      var scrolled = -rect.top;
+      var progress = Math.max(0, Math.min(1, scrolled / sectionHeight));
 
-      if (stageNameEl) stageNameEl.textContent = stageNames[stageIndex];
+      // Continuous progress bar fill
       if (progressFill) progressFill.style.height = (progress * 100) + '%';
 
-      for (var i = 0; i < 5; i++) {
+      // Map to 4 stages
+      var stageIndex = Math.min(3, Math.floor(progress * 4));
+      updateLeftPanel(stageIndex);
+
+      // Right panel stages
+      for (var i = 0; i < 4; i++) {
         var panel = document.getElementById('stage-' + i);
         if (panel) {
           panel.classList.toggle('active', i === stageIndex);
@@ -824,7 +1039,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // ========== TRANSITION BANNER — ARCHITECTURE ANIMATION ==========
+  // ========== TRANSITION BANNER — ARCHITECTURE ANIMATION (NO Three.js) ==========
   var archBanner = document.getElementById('arch-banner');
   var archBannerPlayed = false;
   if (archBanner) {
@@ -852,14 +1067,13 @@ document.addEventListener('DOMContentLoaded', function() {
     bannerObserver.observe(archBanner);
   }
 
-  // ========== SECTION 07 — BUILD LOG STEPS ==========
+  // ========== SECTION 08 — BUILD LOG STEPS ==========
   var logSteps = document.querySelectorAll('.log-step');
   var logLineFill = document.getElementById('log-line-fill');
   var logObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        // Update line fill
         var visibleCount = document.querySelectorAll('.log-step.visible').length;
         if (logLineFill) {
           logLineFill.style.height = ((visibleCount / logSteps.length) * 100) + '%';
@@ -869,7 +1083,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }, observerOptions);
   logSteps.forEach(function(s) { logObserver.observe(s); });
 
-  // ========== SECTION 08 — MOTIVATION WORDS ==========
+  // ========== SECTION 09 — MOTIVATION WORDS ==========
   var quoteEl = document.getElementById('motivation-quote');
   if (quoteEl) {
     var text = quoteEl.textContent.trim();
@@ -924,7 +1138,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // ========== SECTION 09 — CONNECT HEADING ==========
+  // ========== SECTION 10 — CONNECT HEADING ==========
   var connectHeading = document.getElementById('connect-heading');
   if (connectHeading) {
     "Let's Build Something.".split('').forEach(function(ch) {
@@ -943,7 +1157,6 @@ document.addEventListener('DOMContentLoaded', function() {
               s.style.transform = 'translateY(0)';
             }, i * 60);
           });
-          // Confetti
           fireConfetti();
         }
       });
@@ -989,40 +1202,36 @@ document.addEventListener('DOMContentLoaded', function() {
   }, observerOptions);
   statNums.forEach(function(s) { statObserver.observe(s); });
 
-  // ========== THREE.JS BRICK ==========
-  function initBrickScene() {
+  // ========== THREE.JS SMALL BRICK (bottom-right of Section 04 only) ==========
+  function initSmallBrick() {
     var canvas = document.getElementById('brick-canvas');
     if (!canvas || typeof THREE === 'undefined') return;
 
     var scene = new THREE.Scene();
-    var camera = new THREE.PerspectiveCamera(50, canvas.clientWidth / canvas.clientHeight, 0.1, 100);
-    camera.position.set(0, 2, 5);
+    var camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+    camera.position.set(0, 1.5, 3.5);
     camera.lookAt(0, 0, 0);
 
     var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+    renderer.setSize(120, 120);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-    // Lighting
     var ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
     scene.add(ambientLight);
     var dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
-    dirLight.position.set(5, 5, 5);
+    dirLight.position.set(3, 4, 3);
     scene.add(dirLight);
 
-    // Brick body
     var brickMat = new THREE.MeshPhongMaterial({ color: 0x808080 });
-    var bodyGeo = new THREE.BoxGeometry(2, 0.8, 1);
+    var bodyGeo = new THREE.BoxGeometry(1.6, 0.6, 0.8);
     var body = new THREE.Mesh(bodyGeo, brickMat);
     scene.add(body);
 
-    // Studs
-    var studGeo = new THREE.CylinderGeometry(0.2, 0.2, 0.2, window.innerWidth < 768 ? 8 : 16);
-    var positions = [[-0.5, 0.5, -0.25], [0.5, 0.5, -0.25], [-0.5, 0.5, 0.25], [0.5, 0.5, 0.25]];
-    positions.forEach(function(pos) {
-      var stud = new THREE.Mesh(studGeo, brickMat);
-      stud.position.set(pos[0], pos[1], pos[2]);
-      scene.add(stud);
+    var studGeo = new THREE.CylinderGeometry(0.15, 0.15, 0.15, 12);
+    [[-0.4, 0.38, -0.2],[0.4, 0.38, -0.2],[-0.4, 0.38, 0.2],[0.4, 0.38, 0.2]].forEach(function(p) {
+      var s = new THREE.Mesh(studGeo, brickMat);
+      s.position.set(p[0], p[1], p[2]);
+      scene.add(s);
     });
 
     var targetColor = new THREE.Color(0xFFD700);
@@ -1030,31 +1239,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function animate() {
       requestAnimationFrame(animate);
-      body.rotation.y += 0.005;
-      scene.children.forEach(function(child) {
-        if (child.isMesh) child.rotation.y = body.rotation.y;
-      });
-
-      // Color lerp based on scroll
+      body.rotation.y += 0.008;
+      scene.children.forEach(function(c) { if (c.isMesh) c.rotation.y = body.rotation.y; });
       if (rawSection) {
         var rect = rawSection.getBoundingClientRect();
-        var sectionHeight = rawSection.offsetHeight - window.innerHeight;
-        var scrolled = -rect.top;
-        var progress = Math.max(0, Math.min(1, scrolled / sectionHeight));
-        brickMat.color.lerpColors(greyColor, targetColor, progress);
+        var sh = rawSection.offsetHeight - window.innerHeight;
+        var prog = Math.max(0, Math.min(1, -rect.top / sh));
+        brickMat.color.lerpColors(greyColor, targetColor, prog);
       }
-
       renderer.render(scene, camera);
     }
     animate();
   }
 
-  // Wait for Three.js to load
-  if (typeof THREE !== 'undefined') {
-    initBrickScene();
-  } else {
-    window.addEventListener('load', initBrickScene);
-  }
+  if (typeof THREE !== 'undefined') { initSmallBrick(); }
+  else { window.addEventListener('load', initSmallBrick); }
 
 });
 </script>
