@@ -979,15 +979,47 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ========== SECTION 04 — STAGE CHIP CLICK HANDLERS ==========
   var chipStageMap = { 'bronze': 0, 'silver': 1, 'gold': 2, 'ml-ready': 3 };
+
+  function forceShowStage(idx) {
+    // Immediately update left panel text
+    var sNameEl = document.getElementById('stage-name');
+    var sSubEl = document.getElementById('stage-subtitle');
+    var sDescEl = document.getElementById('stage-desc');
+    var allChips = document.querySelectorAll('.stage-chip');
+    var sd = [
+      { name: 'RAW CHAOS', subtitle: 'Stage 1: Bronze Ingestion', desc: 'Raw .dat geometry files from LDraw and catalogue CSVs from Rebrickable arrive unvalidated. The ingestion layer performs raw landing — accepting LDraw and Rebrickable sources as-is into the Bronze zone.', chip: 'bronze' },
+      { name: 'CLEANING THE BRICKS', subtitle: 'Stage 2: Silver Layer', desc: 'Geometry resolution and metadata joining occur here. Invalid rows are flagged with is_valid and issues columns — never dropped. The recursive sub-part resolver ensures geometrically complete point clouds.', chip: 'silver' },
+      { name: 'BUILDING INTELLIGENCE', subtitle: 'Stage 3: Gold Layer', desc: 'High-quality filtered records emerge. Feature engineering enriches each brick with part category, color name, year of production, and normalized geometry. The Gold layer filters to valid records for model output while preserving full lineage.', chip: 'gold' },
+      { name: 'ML READY', subtitle: 'Stage 4: Output', desc: 'Eight enriched JSON files per brick. NumPy point clouds of shape (N, 3) — N vertices with x, y, z coordinates. Directly consumable by PointNet and similar 3D ML architectures. Point cloud sizes range from 120 to 408 vertices.', chip: 'ml-ready' }
+    ];
+    var data = sd[idx];
+    if (sNameEl) { sNameEl.textContent = data.name; sNameEl.style.opacity = '1'; sNameEl.style.transform = 'translateY(0)'; }
+    if (sSubEl) { sSubEl.textContent = data.subtitle; sSubEl.style.opacity = '1'; sSubEl.style.transform = 'translateY(0)'; }
+    if (sDescEl) { sDescEl.textContent = data.desc; sDescEl.style.opacity = '1'; sDescEl.style.transform = 'translateY(0)'; }
+    allChips.forEach(function(c) { c.classList.toggle('active', c.dataset.stage === data.chip); });
+    // Immediately update right panel
+    for (var i = 0; i < 4; i++) {
+      var panel = document.getElementById('stage-' + i);
+      if (panel) panel.classList.toggle('active', i === idx);
+    }
+    // Update progress bar
+    var pf = document.getElementById('progress-fill');
+    if (pf) pf.style.height = ((idx + 1) / 4 * 100) + '%';
+    // Reset currentStageIdx so scroll handler doesn't skip
+    currentStageIdx = idx;
+  }
+
   document.querySelectorAll('.stage-chip').forEach(function(chip) {
     chip.addEventListener('click', function() {
       var stageName = chip.dataset.stage;
       var stageIdx = chipStageMap[stageName];
+      // Immediately show the stage content
+      forceShowStage(stageIdx);
+      // Then scroll to the correct position
       var section = document.getElementById('raw-to-ready');
       if (!section) return;
       var sectionTop = section.offsetTop;
       var sectionHeight = section.offsetHeight - window.innerHeight;
-      // Scroll to the proportional position within the section
       var targetScroll = sectionTop + (stageIdx / 4) * sectionHeight + 10;
       window.scrollTo({ top: targetScroll, behavior: 'smooth' });
     });
